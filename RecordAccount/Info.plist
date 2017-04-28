@@ -20,6 +20,10 @@
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>レコアカはマイクを使用します。</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>レコアカは音声認識機能を使用します。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

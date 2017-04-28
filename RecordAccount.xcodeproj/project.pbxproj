@@ -31,6 +31,10 @@
 		7796F2FA1EB37DB10055FDA5 /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F2F21EB37DB10055FDA5 /* RAMItemAnimationProtocol.swift */; };
 		7796F2FC1EB380E90055FDA5 /* AnimatorMoveLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F2FB1EB380E90055FDA5 /* AnimatorMoveLeft.swift */; };
 		7796F2FE1EB385B70055FDA5 /* UIColorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F2FD1EB385B70055FDA5 /* UIColorCode.swift */; };
+		7796F3001EB3917F0055FDA5 /* mainCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F2FF1EB3917F0055FDA5 /* mainCustomTableViewCell.swift */; };
+		7796F3021EB3925D0055FDA5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3011EB3925D0055FDA5 /* Item.swift */; };
+		7796F3041EB3CE8D0055FDA5 /* tableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3031EB3CE8D0055FDA5 /* tableViewController.swift */; };
+		7796F3061EB3D0920055FDA5 /* editViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3051EB3D0920055FDA5 /* editViewController.swift */; };
 		77F2FCED1EAB4C8C00131C61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */; };
 		77F2FCEF1EAB4C8C00131C61 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2FCEE1EAB4C8C00131C61 /* mainViewController.swift */; };
 		77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F2FCF01EAB4C8C00131C61 /* Main.storyboard */; };
@@ -63,6 +67,10 @@
 		7796F2F21EB37DB10055FDA5 /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		7796F2FB1EB380E90055FDA5 /* AnimatorMoveLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatorMoveLeft.swift; sourceTree = "<group>"; };
 		7796F2FD1EB385B70055FDA5 /* UIColorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorCode.swift; sourceTree = "<group>"; };
+		7796F2FF1EB3917F0055FDA5 /* mainCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainCustomTableViewCell.swift; sourceTree = "<group>"; };
+		7796F3011EB3925D0055FDA5 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		7796F3031EB3CE8D0055FDA5 /* tableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableViewController.swift; sourceTree = "<group>"; };
+		7796F3051EB3D0920055FDA5 /* editViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editViewController.swift; sourceTree = "<group>"; };
 		77F2FCE91EAB4C8C00131C61 /* RecordAccount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecordAccount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77F2FCEE1EAB4C8C00131C61 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +216,10 @@
 				77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */,
 				7796F2FB1EB380E90055FDA5 /* AnimatorMoveLeft.swift */,
 				77F2FCEE1EAB4C8C00131C61 /* mainViewController.swift */,
+				7796F3031EB3CE8D0055FDA5 /* tableViewController.swift */,
+				7796F3051EB3D0920055FDA5 /* editViewController.swift */,
+				7796F3011EB3925D0055FDA5 /* Item.swift */,
+				7796F2FF1EB3917F0055FDA5 /* mainCustomTableViewCell.swift */,
 				77F2FCF01EAB4C8C00131C61 /* Main.storyboard */,
 				77F2FCF31EAB4C8C00131C61 /* Assets.xcassets */,
 				77F2FCF51EAB4C8C00131C61 /* LaunchScreen.storyboard */,
@@ -307,13 +319,17 @@
 				7796F2F71EB37DB10055FDA5 /* RAMTransitionItemAnimations.swift in Sources */,
 				7796F2F41EB37DB10055FDA5 /* RAMFrameItemAnimation.swift in Sources */,
 				7796F2FC1EB380E90055FDA5 /* AnimatorMoveLeft.swift in Sources */,
+				7796F3021EB3925D0055FDA5 /* Item.swift in Sources */,
 				7796F2F31EB37DB10055FDA5 /* RAMBounceAnimation.swift in Sources */,
 				7796F2FA1EB37DB10055FDA5 /* RAMItemAnimationProtocol.swift in Sources */,
 				7796F2F91EB37DB10055FDA5 /* RAMBadge.swift in Sources */,
+				7796F3061EB3D0920055FDA5 /* editViewController.swift in Sources */,
 				77F2FCEF1EAB4C8C00131C61 /* mainViewController.swift in Sources */,
+				7796F3041EB3CE8D0055FDA5 /* tableViewController.swift in Sources */,
 				7796F2FE1EB385B70055FDA5 /* UIColorCode.swift in Sources */,
 				7796F2F81EB37DB10055FDA5 /* RAMAnimatedTabBarController.swift in Sources */,
 				77F2FCED1EAB4C8C00131C61 /* AppDelegate.swift in Sources */,
+				7796F3001EB3917F0055FDA5 /* mainCustomTableViewCell.swift in Sources */,
 				7796F2F61EB37DB10055FDA5 /* RAMRotationAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
