@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		setStatusBarBackgroundColor(color: UIColor(hex: "CFD8DC"))
 		return true
 	}
 
@@ -41,6 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
+	func setStatusBarBackgroundColor(color: UIColor) {
+		UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+		guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else { return }
+		statusBar.backgroundColor = color
+	}
 
 }
 
