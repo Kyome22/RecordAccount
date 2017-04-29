@@ -8,16 +8,18 @@
 
 import UIKit
 import RealmSwift
+import MGSwipeTableCell
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	private var itemModels: Results<ItemModel>!
+	private var sections = [(date: NSDate, items: [(Int, String, Int)], extended: Bool)]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		do {
 			let realm = try Realm()
-			itemModels = realm.objects(ItemModel.self)
+			itemModels = realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: false)
 		} catch {
 		}
     }
@@ -25,6 +27,7 @@ class TableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		tableView.reloadData()
+		separateItemModels()
 	}
 
     override func didReceiveMemoryWarning() {
@@ -46,22 +49,15 @@ class TableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableCustomTableViewCell
 		let item = Item(name: itemModels[indexPath.row].name, value: itemModels[indexPath.row].value)
+		cell.delegate = self
 		cell.setCell(item: item)
-		return cell
-	}
 
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
-	}
-
-	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let editAction = UITableViewRowAction(style: .normal, title: "修正") { (action, indexPath) in
+		let editAction = MGSwipeButton(title: "修正", backgroundColor: UIColor(hex: "43A047")) { (tableCell) -> Bool in
 			self.performSegue(withIdentifier: "edit", sender: nil)
+			return true
 		}
-		editAction.backgroundColor = UIColor(hex: "43A047") //green
 
-
-		let deleteAction = UITableViewRowAction(style: .default, title: "削除") { (action, indexPath) in
+		let deleteAction = MGSwipeButton(title: "削除", backgroundColor: UIColor(hex: "E53935")) { (tableCell) -> Bool in
 			do {
 				let realm = try Realm()
 				try realm.write {
@@ -71,9 +67,35 @@ class TableViewController: UITableViewController {
 			} catch {
 			}
 			tableView.reloadData()
+			return true
 		}
-		deleteAction.backgroundColor = UIColor(hex: "E53935") //red
-		return [editAction, deleteAction]
+
+		cell.rightButtons = [editAction, deleteAction]
+		cell.rightSwipeSettings.transition = MGSwipeTransition.static
+		return cell
+	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.cellForRow(at: indexPath) as! TableCustomTableViewCell
+		cell.showSwipe(.rightToLeft, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+
+	//日付をセクションとして分けるとこまでできた
+	func separateItemModels() {
+		var dateSection: NSDate = itemModels[0].date
+		var items = [(Int, String, Int)]()
+		for item in itemModels {
+			if dateSection.compare(item.date as Date) != .orderedSame {
+				sections.append((date: dateSection, items: items, extended: false))
+				dateSection = item.date
+				items.removeAll()
+				items.append((item.id, item.name, item.value))
+			} else {
+				items.append((item.id, item.name, item.value))
+			}
+		}
+		sections.append((date: dateSection, items: items, extended: false))
 	}
 
 }

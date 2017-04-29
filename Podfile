@@ -7,4 +7,5 @@ target 'RecordAccount' do
 
   # Pods for RecordAccount
   pod 'RealmSwift'
+  pod 'MGSwipeTableCell'
 end

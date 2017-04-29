@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7708DACD1EB4CCBF00820784 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */; };
 		770C4C051EB42BC400F377F2 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C4C041EB42BC400F377F2 /* Realm.framework */; };
 		7796F2C41EB33C4C0055FDA5 /* reco.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BB1EB33C4C0055FDA5 /* reco.png */; };
 		7796F2C51EB33C4C0055FDA5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BC1EB33C4C0055FDA5 /* stop.png */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		3E9EBA8BC101BB365E0617CD /* Pods-RecordAccount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordAccount.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount.release.xcconfig"; sourceTree = "<group>"; };
 		6F7797BEBFE76E029C442099 /* Pods_RecordAccount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordAccount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "Pods/../build/Debug-iphoneos/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
 		770C4C041EB42BC400F377F2 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
 		7796F2BB1EB33C4C0055FDA5 /* reco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reco.png; sourceTree = "<group>"; };
 		7796F2BC1EB33C4C0055FDA5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7708DACD1EB4CCBF00820784 /* MGSwipeTableCell.framework in Frameworks */,
 				77E3C8961EB42D17002C88CC /* RealmSwift.framework in Frameworks */,
 				770C4C051EB42BC400F377F2 /* Realm.framework in Frameworks */,
 				A79580C1B4B9FE28F10F666C /* Pods_RecordAccount.framework in Frameworks */,
@@ -191,6 +194,7 @@
 		ADB56C402EF25C825560F38F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */,
 				77E3C8951EB42D17002C88CC /* RealmSwift.framework */,
 				770C4C041EB42BC400F377F2 /* Realm.framework */,
 				6F7797BEBFE76E029C442099 /* Pods_RecordAccount.framework */,

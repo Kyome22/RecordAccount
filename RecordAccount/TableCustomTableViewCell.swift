@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class TableCustomTableViewCell: UITableViewCell {
+class TableCustomTableViewCell: MGSwipeTableCell {
 
 	private var itemNameLabel = UILabel()
 	private var itemValueLabel = UILabel()
@@ -34,8 +35,8 @@ class TableCustomTableViewCell: UITableViewCell {
 		                              width: size.width * 0.35, height: size.height * 0.9)
 		itemValueLabel.textAlignment = .right
 		itemValueLabel.text = String(item.value) + "円"
-		self.addSubview(itemNameLabel)
-		self.addSubview(itemValueLabel)
+		self.contentView.addSubview(itemNameLabel)
+		self.contentView.addSubview(itemValueLabel)
 	}
 
 }

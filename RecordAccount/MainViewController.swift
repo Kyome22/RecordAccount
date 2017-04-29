@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var recordButton: UIButton!
 
 	private var items = [Item]()
-	private var firstTime: Bool = true
+	private var downFlag: Bool = true
 	private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
 	private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest? = nil
 	private var recognitionTask: SFSpeechRecognitionTask? = nil
@@ -36,7 +36,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		firstTime = true
+		downFlag = true
 		let size: CGRect = view.bounds
 		mainTable.alpha = 0.0
 		mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
@@ -51,7 +51,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
 		                            width: size.width * 0.75, height: size.width * 0.75)
 
-
+		//スキーマを変えてしまった時
+		//if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+		//	try! FileManager.default.removeItem(at: fileURL)
+		//}
 
 	}
 
@@ -203,9 +206,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.uploadButton.frame = CGRect(x: toPos2.x, y: toPos2.y,
 			                                 width: self.uploadButton.frame.width, height: 45)
 		}) { (finished) in
-			if self.firstTime {
+			if self.downFlag {
 				self.uploadButton.isEnabled = true
-				self.firstTime = false
+				self.downFlag = false
 			}
 			let indexPath: IndexPath = IndexPath(row: 0, section: self.items.count - 1)
 			self.mainTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
@@ -224,6 +227,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.uploadButton.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3 + 5,
 			                                 width: size.width * 0.8, height: 45)
 		}) { (finished) in
+			self.downFlag = true
 			self.mainTable.reloadData()
 		}
 	}
@@ -266,7 +270,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainTable.reloadData()
 
 		if results.count > 0 {
-			if firstTime {
+			if downFlag {
 				moveDownAnimation()
 			}
 			addItemAnimation()
@@ -322,9 +326,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func saveItemData() {
+		let date = NSDate()
+		var id: Int = 0
 		for item in items {
 			let newItemModel = ItemModel()
-			newItemModel.date = NSDate()
+			newItemModel.date = date
+			newItemModel.id = id
 			newItemModel.name = item.name
 			newItemModel.value = item.value
 			do {
@@ -335,6 +342,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			} catch {
 				print("Save is Faild")
 			}
+			id += 1
 		}
 	}
 

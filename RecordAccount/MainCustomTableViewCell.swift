@@ -37,8 +37,8 @@ class MainCustomTableViewCell: UITableViewCell {
 		itemValueLabel.textAlignment = .right
 		itemValueLabel.font = UIFont(name: itemValueLabel.font.fontName, size: 21)
 		itemValueLabel.text = String(item.value) + "円"
-		self.addSubview(itemNameLabel)
-		self.addSubview(itemValueLabel)
+		self.contentView.addSubview(itemNameLabel)
+		self.contentView.addSubview(itemValueLabel)
 	}
 
 }

@@ -10,6 +10,7 @@ import RealmSwift
 
 class ItemModel: Object {
 	dynamic var date: NSDate = NSDate()
+	dynamic var id: Int = 0
 	dynamic var name: String = ""
 	dynamic var value: Int = 0
 }
