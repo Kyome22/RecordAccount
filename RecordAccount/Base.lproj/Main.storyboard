@@ -13,7 +13,7 @@
         <!--記録する-->
         <scene sceneID="pVy-kK-g4v">
             <objects>
-                <viewController id="B1H-lf-tdZ" customClass="mainViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="B1H-lf-tdZ" customClass="MainViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aGA-AZ-Q1h"/>
                         <viewControllerLayoutGuide type="bottom" id="8gB-lR-hhX"/>
@@ -37,11 +37,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" id="MXW-Tj-NcZ" customClass="mainCustomTableViewCell" customModule="RecordAccount" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" id="MXW-Tj-NcZ" customClass="MainCustomTableViewCell" customModule="RecordAccount" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MXW-Tj-NcZ" id="RJp-FE-J9I">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -98,11 +98,12 @@
         <!--お会計履歴-->
         <scene sceneID="OBG-VN-L15">
             <objects>
-                <tableViewController id="fkM-9I-XPP" customClass="tableViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fkM-9I-XPP" customClass="TableViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ciH-pG-nbh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.26956862211227417" green="0.35323816537857056" blue="0.39074045419692993" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i9I-Gq-cOO">
                             <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,11 +115,11 @@
                             </connections>
                         </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="UWu-1X-TsG">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" id="UWu-1X-TsG" customClass="TableCustomTableViewCell" customModule="RecordAccount" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UWu-1X-TsG" id="VOV-c2-NWx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -140,7 +141,7 @@
         <!--Edit View Controller-->
         <scene sceneID="T3K-4I-myQ">
             <objects>
-                <viewController id="URd-w2-5Oi" customClass="editViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="URd-w2-5Oi" customClass="EditViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AWu-W4-F66"/>
                         <viewControllerLayoutGuide type="bottom" id="PAU-kh-lnC"/>

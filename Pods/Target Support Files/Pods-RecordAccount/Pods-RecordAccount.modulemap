@@ -1,0 +1,6 @@
+framework module Pods_RecordAccount {
+  umbrella header "Pods-RecordAccount-umbrella.h"
+
+  export *
+  module * { export * }
+}
