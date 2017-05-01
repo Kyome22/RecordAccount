@@ -26,8 +26,9 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tableView.reloadData()
 		separateItemModels()
+
+		printSections()
 	}
 
     override func didReceiveMemoryWarning() {
@@ -39,18 +40,26 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 	}
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return sections.count
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return itemModels.count
+		let rowInSection = sections[section].extended ? sections[section].items.count + 1 : 1
+		return rowInSection
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableCustomTableViewCell
-		let item = Item(name: itemModels[indexPath.row].name, value: itemModels[indexPath.row].value)
-		cell.delegate = self
-		cell.setCell(item: item)
+		var cell: MGSwipeTableCell!
+
+		if indexPath.row == 0 {
+			cell = DateCustomTableViewCell(style: .default, reuseIdentifier: "dateCell")
+			(cell as! DateCustomTableViewCell).setCell(date: sections[indexPath.section].date)
+ 		} else {
+			cell = ItemCustomTableViewCell(style: .default, reuseIdentifier: "itemCell")
+			let name: String = sections[indexPath.section].items[indexPath.row - 1].1
+			let value: Int = sections[indexPath.section].items[indexPath.row - 1].2
+			(cell as! ItemCustomTableViewCell).setCell(item: Item(name: name, value: value))
+		}
 
 		let editAction = MGSwipeButton(title: "修正", backgroundColor: UIColor(hex: "43A047")) { (tableCell) -> Bool in
 			self.performSegue(withIdentifier: "edit", sender: nil)
@@ -58,44 +67,106 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 		}
 
 		let deleteAction = MGSwipeButton(title: "削除", backgroundColor: UIColor(hex: "E53935")) { (tableCell) -> Bool in
+
 			do {
 				let realm = try Realm()
 				try realm.write {
-					realm.delete(self.itemModels[indexPath.row])
+					let date = self.sections[indexPath.section].date
+					if indexPath.row == 0 || self.sections[indexPath.section].items.count == 1 {
+						realm.delete(realm.objects(ItemModel.self).filter("date == %@", date))
+						self.sections.remove(at: indexPath.section)
+						tableView.deleteSections(IndexSet(integer: indexPath.section), with: .left)
+					} else {
+						let id = self.sections[indexPath.section].items[indexPath.row - 1].0
+						realm.delete(realm.objects(ItemModel.self).filter("date == %@ AND id == %@", date, id))
+						self.sections[indexPath.section].items.remove(at: indexPath.row - 1)
+						tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: .left)
+					}
 				}
-				tableView.deleteRows(at: [indexPath], with: .fade)
 			} catch {
 			}
-			tableView.reloadData()
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+				self.tableView.reloadData()
+			})
+			self.printSections()
 			return true
 		}
 
+		cell.delegate = self
 		cell.rightButtons = [editAction, deleteAction]
 		cell.rightSwipeSettings.transition = MGSwipeTransition.static
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath) as! TableCustomTableViewCell
-		cell.showSwipe(.rightToLeft, animated: true)
+		if indexPath.row == 0 {
+			sections[indexPath.section].extended = !sections[indexPath.section].extended
+			if sections[indexPath.section].extended {
+				expand(tableView: tableView, indexPath: indexPath)
+			} else {
+				contact(tableView: tableView, indexPath: indexPath)
+			}
+		} else {
+			let cell = tableView.cellForRow(at: indexPath) as! ItemCustomTableViewCell
+			cell.showSwipe(.rightToLeft, animated: true)
+		}
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
-	//日付をセクションとして分けるとこまでできた
-	func separateItemModels() {
-		var dateSection: NSDate = itemModels[0].date
-		var items = [(Int, String, Int)]()
-		for item in itemModels {
-			if dateSection.compare(item.date as Date) != .orderedSame {
-				sections.append((date: dateSection, items: items, extended: false))
-				dateSection = item.date
-				items.removeAll()
-				items.append((item.id, item.name, item.value))
-			} else {
-				items.append((item.id, item.name, item.value))
-			}
+	//アコーディオン 開
+	func expand(tableView: UITableView, indexPath: IndexPath) {
+		let startRow = indexPath.row + 1
+		let endRow = sections[indexPath.section].items.count + 1
+		var indexPaths = [IndexPath]()
+		for i in startRow ..< endRow {
+			indexPaths.append(IndexPath(row: i, section: indexPath.section))
 		}
-		sections.append((date: dateSection, items: items, extended: false))
+		tableView.insertRows(at: indexPaths, with: .fade)
+		tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: indexPath.section), at: .top, animated: true)
 	}
 
+	//アコーディオン 閉
+	func contact(tableView: UITableView, indexPath: IndexPath) {
+		let startRow = indexPath.row + 1
+		let endRow = sections[indexPath.section].items.count + 1
+		var indexPaths = [IndexPath]()
+		for i in startRow ..< endRow {
+			indexPaths.append(IndexPath(row: i, section: indexPath.section))
+		}
+		tableView.deleteRows(at: indexPaths, with: .fade)
+	}
+
+	//日付でセクション分け
+	func separateItemModels() {
+		sections.removeAll()
+		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+		if itemModels.count > 0 {
+			var dateSection: NSDate = itemModels[0].date
+			var items = [(Int, String, Int)]()
+			for item in itemModels {
+				if !calendar.isDate(dateSection as Date, inSameDayAs: item.date as Date) {
+					sections.append((date: dateSection, items: items, extended: false))
+					dateSection = item.date
+					items.removeAll()
+					items.append((item.id, item.name, item.value))
+				} else {
+					items.append((item.id, item.name, item.value))
+				}
+			}
+			sections.append((date: dateSection, items: items, extended: false))
+			tableView.reloadData()
+		}
+	}
+
+	func printSections() {
+		for section in sections {
+			let formatter = DateFormatter()
+			formatter.dateFormat = "yyyy-MM-dd"
+			print(formatter.string(from: section.date as Date))
+			for item in section.items {
+				print("\t\(item.1) : \(item.2)円")
+			}
+		}
+		print("\n\n")
+	}
 }
