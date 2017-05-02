@@ -60,39 +60,46 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-//		let statusMic = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
-		let statusSpeech = SFSpeechRecognizer.authorizationStatus()
+		var audioFlag: Bool = false
+		var speechFlag: Bool = false
 
-//		if statusMic != AVAuthorizationStatus.authorized {
-//			OperationQueue.main.addOperation {
-//				let alert =	UIAlertController(title: "マイク使用不可",
-//				           	                  message: "[設定]にてマイクの使用を許可してください。",
-//				           	                  preferredStyle: .alert)
-//				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-//				alert.addAction(action)
-//				self.present(alert, animated: true, completion: nil)
-//			}
-//		}
+		let semaphore = DispatchSemaphore(value: 0)
 
-		AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+		AVAudioSession.sharedInstance().requestRecordPermission( { (granted: Bool) -> Void in
 			if granted {
-				print("yass")
+				audioFlag = true
 			} else {
-				print("Permission to record not granted")
+				OperationQueue.main.addOperation {
+					let alert =	UIAlertController(title: "マイク使用不可",
+					           	                  message: "[設定]にてマイクの使用を許可してください。",
+					           	                  preferredStyle: .alert)
+					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+					alert.addAction(action)
+					self.present(alert, animated: true, completion: nil)
+				}
 			}
+			semaphore.signal()
 		})
 
-		if statusSpeech != SFSpeechRecognizerAuthorizationStatus.authorized {
-			OperationQueue.main.addOperation {
-				let alert =	UIAlertController(title: "音声認識使用不可",
-				           	                  message: "[設定]にて音声認識を許可してください。",
-				           	                  preferredStyle: .alert)
-				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-				alert.addAction(action)
-				self.present(alert, animated: true, completion: nil)
+		SFSpeechRecognizer.requestAuthorization { (status) in
+			if status == .authorized {
+				speechFlag = true
+			} else {
+				OperationQueue.main.addOperation {
+					let alert =	UIAlertController(title: "音声認識使用不可",
+					           	                  message: "[設定]にて音声認識を許可してください。",
+					           	                  preferredStyle: .alert)
+					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+					alert.addAction(action)
+					self.present(alert, animated: true, completion: nil)
+				}
 			}
+			semaphore.signal()
 		}
-		recordButton.isEnabled = (statusMic == .authorized) && (statusSpeech == .authorized)
+
+		semaphore.wait()
+		semaphore.wait()
+		recordButton.isEnabled = audioFlag && speechFlag
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
