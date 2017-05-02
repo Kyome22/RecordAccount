@@ -60,19 +60,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		let statusMic = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
+//		let statusMic = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
 		let statusSpeech = SFSpeechRecognizer.authorizationStatus()
 
-		if statusMic != AVAuthorizationStatus.authorized {
-			OperationQueue.main.addOperation {
-				let alert =	UIAlertController(title: "マイク使用不可",
-				           	                  message: "[設定]にてマイクの使用を許可してください。",
-				           	                  preferredStyle: .alert)
-				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-				alert.addAction(action)
-				self.present(alert, animated: true, completion: nil)
+//		if statusMic != AVAuthorizationStatus.authorized {
+//			OperationQueue.main.addOperation {
+//				let alert =	UIAlertController(title: "マイク使用不可",
+//				           	                  message: "[設定]にてマイクの使用を許可してください。",
+//				           	                  preferredStyle: .alert)
+//				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//				alert.addAction(action)
+//				self.present(alert, animated: true, completion: nil)
+//			}
+//		}
+
+		AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+			if granted {
+				print("yass")
+			} else {
+				print("Permission to record not granted")
 			}
-		}
+		})
+
 		if statusSpeech != SFSpeechRecognizerAuthorizationStatus.authorized {
 			OperationQueue.main.addOperation {
 				let alert =	UIAlertController(title: "音声認識使用不可",
