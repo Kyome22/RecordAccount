@@ -323,7 +323,7 @@
     </scenes>
     <resources>
         <image name="logs" width="25" height="25"/>
-        <image name="reco.png" width="512" height="512"/>
+        <image name="reco.png" width="320" height="320"/>
         <image name="record" width="25" height="25"/>
     </resources>
 </document>

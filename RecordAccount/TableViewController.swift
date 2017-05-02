@@ -138,14 +138,26 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	//日付でセクション分け
 	func separateItemModels() {
+		var extendedList = [(date: NSDate, extended: Bool)]()
+		for section in sections {
+			extendedList.append((date: section.date, extended: section.extended))
+		}
+
 		sections.removeAll()
 		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
 		if itemModels.count > 0 {
 			var dateSection: NSDate = itemModels[0].date
+			var flag: Bool = false
+			for e in extendedList {
+				if calendar.isDate(e.date as Date, inSameDayAs: dateSection as Date) {
+					flag = e.extended
+					break
+				}
+			}
 			var items = [(Int, String, Int)]()
 			for item in itemModels {
 				if !calendar.isDate(dateSection as Date, inSameDayAs: item.date as Date) {
-					sections.append((date: dateSection, items: items, extended: false))
+					sections.append((date: dateSection, items: items, extended: flag))
 					dateSection = item.date
 					items.removeAll()
 					items.append((item.id, item.name, item.value))
@@ -153,7 +165,7 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 					items.append((item.id, item.name, item.value))
 				}
 			}
-			sections.append((date: dateSection, items: items, extended: false))
+			sections.append((date: dateSection, items: items, extended: flag))
 			tableView.reloadData()
 		}
 	}
