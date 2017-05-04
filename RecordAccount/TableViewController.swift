@@ -22,6 +22,8 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 			itemModels = realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: false)
 		} catch {
 		}
+		tableView.separatorInset = UIEdgeInsets.zero
+		tableView.tableFooterView = UIView()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -35,10 +37,14 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
         super.didReceiveMemoryWarning()
     }
 
-	@IBAction func push(_ sender: Any) {
-		self.performSegue(withIdentifier: "edit", sender: nil)
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "edit" {
+			let editViewController = segue.destination as! EditViewController
+			editViewController.parameters = sender as! [String : Any]
+		}
 	}
 
+	//UITableViewDataSource
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return sections.count
 	}
@@ -62,7 +68,13 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 		}
 
 		let editAction = MGSwipeButton(title: "修正", backgroundColor: UIColor(hex: "43A047")) { (tableCell) -> Bool in
-			self.performSegue(withIdentifier: "edit", sender: nil)
+			let date: NSDate = self.sections[indexPath.section].date
+
+			let id: Int = self.sections[indexPath.section].items[indexPath.row - 1].0
+			let name: String = self.sections[indexPath.section].items[indexPath.row - 1].1
+			let value: Int = self.sections[indexPath.section].items[indexPath.row - 1].2
+
+			self.performSegue(withIdentifier: "edit", sender: ["date" : date, "id" : id, "name" : name, "value" : value])
 			return true
 		}
 
@@ -93,7 +105,7 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 		}
 
 		cell.delegate = self
-		cell.rightButtons = [editAction, deleteAction]
+		cell.rightButtons = (indexPath.row == 0) ? [deleteAction] : [editAction, deleteAction]
 		cell.rightSwipeSettings.transition = MGSwipeTransition.static
 		return cell
 	}
@@ -138,25 +150,19 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	//日付でセクション分け
 	func separateItemModels() {
-		var extendedList = [(date: NSDate, extended: Bool)]()
+		var extendedList: [NSDate : Bool] = [:]
 		for section in sections {
-			extendedList.append((date: section.date, extended: section.extended))
+			extendedList[section.date] = section.extended
 		}
 
 		sections.removeAll()
 		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
 		if itemModels.count > 0 {
 			var dateSection: NSDate = itemModels[0].date
-			var flag: Bool = false
-			for e in extendedList {
-				if calendar.isDate(e.date as Date, inSameDayAs: dateSection as Date) {
-					flag = e.extended
-					break
-				}
-			}
 			var items = [(Int, String, Int)]()
 			for item in itemModels {
 				if !calendar.isDate(dateSection as Date, inSameDayAs: item.date as Date) {
+					let flag: Bool = extendedList[dateSection] ?? false
 					sections.append((date: dateSection, items: items, extended: flag))
 					dateSection = item.date
 					items.removeAll()
@@ -165,6 +171,7 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 					items.append((item.id, item.name, item.value))
 				}
 			}
+			let flag: Bool = extendedList[dateSection] ?? false
 			sections.append((date: dateSection, items: items, extended: flag))
 			tableView.reloadData()
 		}
@@ -176,7 +183,7 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 			formatter.dateFormat = "yyyy-MM-dd"
 			print(formatter.string(from: section.date as Date))
 			for item in section.items {
-				print("\t\(item.1) : \(item.2)円")
+				print("\t\(item.0) : \(item.1) : \(item.2)円")
 			}
 		}
 		print("\n\n")

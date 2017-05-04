@@ -23,9 +23,9 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="loG-7q-ouF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="loG-7q-ouF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="1RE-bA-ufy"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="loG-7q-ouF" secondAttribute="bottom" id="8pz-qC-tb4"/>

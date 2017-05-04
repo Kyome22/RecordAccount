@@ -52,9 +52,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		                            width: size.width * 0.75, height: size.width * 0.75)
 
 		//スキーマを変えてしまった時
-//		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-//			try! FileManager.default.removeItem(at: fileURL)
-//		}
+		//		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+		//			try! FileManager.default.removeItem(at: fileURL)
+		//		}
 
 	}
 
@@ -69,14 +69,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			if granted {
 				audioFlag = true
 			} else {
-				OperationQueue.main.addOperation {
-					let alert =	UIAlertController(title: "マイク使用不可",
-					           	                  message: "[設定]にてマイクの使用を許可してください。",
-					           	                  preferredStyle: .alert)
-					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-					alert.addAction(action)
-					self.present(alert, animated: true, completion: nil)
-				}
+				let alert =	UIAlertController(title: "マイク使用不可",
+				           	                  message: "[設定]にてマイクの使用を許可してください。",
+				           	                  preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+				alert.addAction(action)
+				self.present(alert, animated: true, completion: nil)
 			}
 			semaphore.signal()
 		})
@@ -85,14 +83,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			if status == .authorized {
 				speechFlag = true
 			} else {
-				OperationQueue.main.addOperation {
-					let alert =	UIAlertController(title: "音声認識使用不可",
-					           	                  message: "[設定]にて音声認識を許可してください。",
-					           	                  preferredStyle: .alert)
-					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-					alert.addAction(action)
-					self.present(alert, animated: true, completion: nil)
-				}
+				let alert =	UIAlertController(title: "音声認識使用不可",
+				           	                  message: "[設定]にて音声認識を許可してください。",
+				           	                  preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+				alert.addAction(action)
+				self.present(alert, animated: true, completion: nil)
 			}
 			semaphore.signal()
 		}
@@ -173,7 +169,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	@IBAction func pushRecord(_ sender: Any) {
-//		saveDummyItems()
+		//saveDummyItems()
 		if checkNetwork() {
 			if audioEngine.isRunning {
 				timer?.invalidate()
@@ -190,7 +186,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			alert.addAction(action)
 			self.present(alert, animated: true, completion: nil)
 		}
-
 	}
 
 	func moveDownAnimation() {
@@ -345,21 +340,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	func saveItemData() {
 		let date = NSDate()
 		var id: Int = 0
-		for item in items {
-			let newItemModel = ItemModel()
-			newItemModel.date = date
-			newItemModel.id = id
-			newItemModel.name = item.name
-			newItemModel.value = item.value
-			do {
-				let realm = try Realm()
+		do {
+			let realm = try Realm()
+			for item in items {
+				let newItemModel = ItemModel()
+				newItemModel.date = date
+				newItemModel.id = id
+				newItemModel.name = item.name
+				newItemModel.value = item.value
 				try realm.write({
 					realm.add(newItemModel)
 				})
-			} catch {
-				print("Save is Faild")
+				id += 1
 			}
-			id += 1
+		} catch {
+			print("Save is Faild")
 		}
 	}
 
@@ -405,6 +400,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		newItemModel.value = value
 		return newItemModel
 	}
-
+	
 }
 
