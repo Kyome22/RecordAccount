@@ -13,7 +13,7 @@ import MGSwipeTableCell
 class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	private var itemModels: Results<ItemModel>!
-	private var sections = [(date: NSDate, items: [(Int, String, Int)], extended: Bool)]()
+	private var sections = [(date: String, items: [(uuid: String, name: String, value: Int)], extended: Bool)]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,29 +68,27 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 		}
 
 		let editAction = MGSwipeButton(title: "修正", backgroundColor: UIColor(hex: "43A047")) { (tableCell) -> Bool in
-			let date: NSDate = self.sections[indexPath.section].date
+			let date: String = self.sections[indexPath.section].date
+			let uuid: String = self.sections[indexPath.section].items[indexPath.row - 1].uuid
+			let name: String = self.sections[indexPath.section].items[indexPath.row - 1].name
+			let value: Int = self.sections[indexPath.section].items[indexPath.row - 1].value
 
-			let id: Int = self.sections[indexPath.section].items[indexPath.row - 1].0
-			let name: String = self.sections[indexPath.section].items[indexPath.row - 1].1
-			let value: Int = self.sections[indexPath.section].items[indexPath.row - 1].2
-
-			self.performSegue(withIdentifier: "edit", sender: ["date" : date, "id" : id, "name" : name, "value" : value])
+			self.performSegue(withIdentifier: "edit", sender: ["date" : date, "uuid" : uuid, "name" : name, "value" : value])
 			return true
 		}
 
 		let deleteAction = MGSwipeButton(title: "削除", backgroundColor: UIColor(hex: "E53935")) { (tableCell) -> Bool in
-
 			do {
 				let realm = try Realm()
 				try realm.write {
-					let date = self.sections[indexPath.section].date
+					let date: String = self.sections[indexPath.section].date
 					if indexPath.row == 0 || self.sections[indexPath.section].items.count == 1 {
 						realm.delete(realm.objects(ItemModel.self).filter("date == %@", date))
 						self.sections.remove(at: indexPath.section)
 						tableView.deleteSections(IndexSet(integer: indexPath.section), with: .left)
 					} else {
-						let id = self.sections[indexPath.section].items[indexPath.row - 1].0
-						realm.delete(realm.objects(ItemModel.self).filter("date == %@ AND id == %@", date, id))
+						let uuid = self.sections[indexPath.section].items[indexPath.row - 1].uuid
+						realm.delete(realm.objects(ItemModel.self).filter("uuid == %@", uuid))
 						self.sections[indexPath.section].items.remove(at: indexPath.row - 1)
 						tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: .left)
 					}
@@ -150,25 +148,24 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	//日付でセクション分け
 	func separateItemModels() {
-		var extendedList: [NSDate : Bool] = [:]
+		var extendedList: [String : Bool] = [:]
 		for section in sections {
 			extendedList[section.date] = section.extended
 		}
 
 		sections.removeAll()
-		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
 		if itemModels.count > 0 {
-			var dateSection: NSDate = itemModels[0].date
-			var items = [(Int, String, Int)]()
+			var dateSection: String = itemModels[0].date
+			var items = [(uuid: String, name: String, value: Int)]()
 			for item in itemModels {
-				if !calendar.isDate(dateSection as Date, inSameDayAs: item.date as Date) {
+				if dateSection != item.date {
 					let flag: Bool = extendedList[dateSection] ?? false
 					sections.append((date: dateSection, items: items, extended: flag))
 					dateSection = item.date
 					items.removeAll()
-					items.append((item.id, item.name, item.value))
+					items.append((item.uuid, item.name, item.value))
 				} else {
-					items.append((item.id, item.name, item.value))
+					items.append((item.uuid, item.name, item.value))
 				}
 			}
 			let flag: Bool = extendedList[dateSection] ?? false
@@ -179,11 +176,9 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 	func printSections() {
 		for section in sections {
-			let formatter = DateFormatter()
-			formatter.dateFormat = "yyyy-MM-dd"
-			print(formatter.string(from: section.date as Date))
+			print(section.date)
 			for item in section.items {
-				print("\t\(item.0) : \(item.1) : \(item.2)円")
+				print("\t\(item.uuid) : \(item.name) : \(item.value)円")
 			}
 		}
 		print("\n\n")

@@ -52,9 +52,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		                            width: size.width * 0.75, height: size.width * 0.75)
 
 		//スキーマを変えてしまった時
-		//		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-		//			try! FileManager.default.removeItem(at: fileURL)
-		//		}
+//		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+//			try! FileManager.default.removeItem(at: fileURL)
+//		}
 
 	}
 
@@ -169,23 +169,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	@IBAction func pushRecord(_ sender: Any) {
-		//saveDummyItems()
-		if checkNetwork() {
-			if audioEngine.isRunning {
-				timer?.invalidate()
-				audioEngine.stop()
-				recognitionRequest?.endAudio()
-			} else {
-				try! startRecording()
-			}
-		} else {
-			let alert =	UIAlertController(title: "ネットワークエラー",
-			           	                  message: "インターネットに接続してください。",
-			           	                  preferredStyle: .alert)
-			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-			alert.addAction(action)
-			self.present(alert, animated: true, completion: nil)
-		}
+		saveDummyItems()
+//		if checkNetwork() {
+//			if audioEngine.isRunning {
+//				timer?.invalidate()
+//				audioEngine.stop()
+//				recognitionRequest?.endAudio()
+//			} else {
+//				try! startRecording()
+//			}
+//		} else {
+//			let alert =	UIAlertController(title: "ネットワークエラー",
+//			           	                  message: "インターネットに接続してください。",
+//			           	                  preferredStyle: .alert)
+//			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//			alert.addAction(action)
+//			self.present(alert, animated: true, completion: nil)
+//		}
 	}
 
 	func moveDownAnimation() {
@@ -338,20 +338,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func saveItemData() {
-		let date = NSDate()
-		var id: Int = 0
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		let date: String = formatter.string(from: Date())
 		do {
 			let realm = try Realm()
 			for item in items {
 				let newItemModel = ItemModel()
 				newItemModel.date = date
-				newItemModel.id = id
+				newItemModel.uuid = UUID().uuidString
 				newItemModel.name = item.name
 				newItemModel.value = item.value
 				try realm.write({
 					realm.add(newItemModel)
 				})
-				id += 1
 			}
 		} catch {
 			print("Save is Faild")
@@ -361,23 +361,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	//ダミー
 	func saveDummyItems() {
 		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-		let date0 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 27, hour: 20, minute: 26, second: 0))!
-		let date1 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 28, hour: 10, minute: 30, second: 0))!
-		let date2 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 29, hour: 12, minute:  0, second: 10))!
-		let date3 = calendar.date(from: DateComponents(year: 2017, month: 5, day:  1, hour: 13, minute: 10, second: 15))!
+		let date0 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 27))!
+		let date1 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 28))!
+		let date2 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 29))!
+		let date3 = calendar.date(from: DateComponents(year: 2017, month: 5, day:  1))!
 
 		var items2 = [ItemModel]()
-		items2.append(makeItemModel(date: date0, id: 0, name: "うどん", value: 500))
-		items2.append(makeItemModel(date: date0, id: 1, name: "そば", value: 1600))
-		items2.append(makeItemModel(date: date0, id: 2, name: "きつねうどん", value: 500))
-		items2.append(makeItemModel(date: date1, id: 0, name: "チョコレート", value: 400))
-		items2.append(makeItemModel(date: date1, id: 1, name: "ケーキ", value: 170))
-		items2.append(makeItemModel(date: date2, id: 0, name: "らーめん", value: 300))
-		items2.append(makeItemModel(date: date2, id: 1, name: "カレー", value: 170))
-		items2.append(makeItemModel(date: date2, id: 2, name: "カツカレー", value: 150))
-		items2.append(makeItemModel(date: date2, id: 3, name: "うどん", value: 200))
-		items2.append(makeItemModel(date: date3, id: 0, name: "オムライス", value: 120))
-		items2.append(makeItemModel(date: date3, id: 1, name: "パン", value: 100))
+		items2.append(makeItemModel(date: date0, name: "うどん", value: 500))
+		items2.append(makeItemModel(date: date0, name: "そば", value: 1600))
+		items2.append(makeItemModel(date: date0, name: "きつねうどん", value: 500))
+		items2.append(makeItemModel(date: date1, name: "チョコレート", value: 400))
+		items2.append(makeItemModel(date: date1, name: "ケーキ", value: 170))
+		items2.append(makeItemModel(date: date2, name: "らーめん", value: 300))
+		items2.append(makeItemModel(date: date2, name: "カレー", value: 170))
+		items2.append(makeItemModel(date: date2, name: "カツカレー", value: 150))
+		items2.append(makeItemModel(date: date2, name: "うどん", value: 200))
+		items2.append(makeItemModel(date: date3, name: "オムライス", value: 120))
+		items2.append(makeItemModel(date: date3, name: "パン", value: 100))
 
 		for item in items2 {
 			do {
@@ -392,12 +392,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	}
 
-	func makeItemModel(date: Date, id: Int, name: String, value: Int) -> ItemModel {
+	func makeItemModel(date: Date, name: String, value: Int) -> ItemModel {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		let dateStr: String = formatter.string(from: date)
+
 		let newItemModel = ItemModel()
-		newItemModel.date = date as NSDate
-		newItemModel.id = id
+		newItemModel.date = dateStr
+		newItemModel.uuid = UUID().uuidString
 		newItemModel.name = name
 		newItemModel.value = value
+		
 		return newItemModel
 	}
 	

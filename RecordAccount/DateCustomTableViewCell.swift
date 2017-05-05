@@ -22,15 +22,15 @@ class DateCustomTableViewCell: MGSwipeTableCell {
         super.setSelected(selected, animated: animated)
     }
 
-	func setCell(date: NSDate) {
+	func setCell(date: String) {
 		let size: CGRect = self.bounds
 		self.layer.backgroundColor = UIColor.white.cgColor
 		dateLabel.frame = CGRect(x: size.width * 0.05, y: size.height * 0.05,
 		                             width: size.width * 0.5, height: size.height * 0.9)
 		dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 21)
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy/MM/dd"
-		dateLabel.text = formatter.string(from: date as Date)
+		let array = date.components(separatedBy: "-")
+		dateLabel.text = String(format: "%d / %d / %d", arguments: [Int(array[0])!, Int(array[1])!, Int(array[2])!])
+
 		self.contentView.addSubview(dateLabel)
 	}
 
