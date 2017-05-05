@@ -169,23 +169,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	@IBAction func pushRecord(_ sender: Any) {
-		saveDummyItems()
-//		if checkNetwork() {
-//			if audioEngine.isRunning {
-//				timer?.invalidate()
-//				audioEngine.stop()
-//				recognitionRequest?.endAudio()
-//			} else {
-//				try! startRecording()
-//			}
-//		} else {
-//			let alert =	UIAlertController(title: "ネットワークエラー",
-//			           	                  message: "インターネットに接続してください。",
-//			           	                  preferredStyle: .alert)
-//			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-//			alert.addAction(action)
-//			self.present(alert, animated: true, completion: nil)
-//		}
+//		saveDummyItems()
+		if checkNetwork() {
+			if audioEngine.isRunning {
+				timer?.invalidate()
+				audioEngine.stop()
+				recognitionRequest?.endAudio()
+			} else {
+				try! startRecording()
+			}
+		} else {
+			let alert =	UIAlertController(title: "ネットワークエラー",
+			           	                  message: "インターネットに接続してください。",
+			           	                  preferredStyle: .alert)
+			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(action)
+			self.present(alert, animated: true, completion: nil)
+		}
 	}
 
 	func moveDownAnimation() {
