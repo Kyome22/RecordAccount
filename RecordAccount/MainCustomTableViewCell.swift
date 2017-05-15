@@ -10,8 +10,9 @@ import UIKit
 
 class MainCustomTableViewCell: UITableViewCell {
 
-	private var itemNameLabel = UILabel()
-	private var itemValueLabel = UILabel()
+	public var itemNameField = UITextField()
+	public var itemValueField = UITextField()
+	private var unitLabel = UILabel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,18 +26,27 @@ class MainCustomTableViewCell: UITableViewCell {
 		self.layer.cornerRadius = 10
 		self.layer.backgroundColor = UIColor(hex: "ECEFF1").cgColor
 		let size: CGRect = self.bounds
-		itemNameLabel.frame = CGRect(x: size.width * 0.05, y: size.height * 0.05,
+		itemNameField.frame = CGRect(x: size.width * 0.05, y: size.height * 0.05,
 		                             width: size.width * 0.5, height: size.height * 0.9)
-		itemNameLabel.font = UIFont(name: itemValueLabel.font.fontName, size: 21)
-		itemNameLabel.text = item.name
+		itemNameField.font = UIFont(name: itemValueField.font!.fontName, size: 21)
+		itemNameField.text = item.name
+		itemNameField.keyboardType = UIKeyboardType.default
 
-		itemValueLabel.frame = CGRect(x: size.width * 0.6, y: size.height * 0.05,
-		                              width: size.width * 0.35, height: size.height * 0.9)
-		itemValueLabel.textAlignment = .right
-		itemValueLabel.font = UIFont(name: itemValueLabel.font.fontName, size: 21)
-		itemValueLabel.text = String(item.value) + "円"
-		self.contentView.addSubview(itemNameLabel)
-		self.contentView.addSubview(itemValueLabel)
+		itemValueField.frame = CGRect(x: size.width * 0.6, y: size.height * 0.05,
+		                              width: size.width * 0.275, height: size.height * 0.9)
+		itemValueField.textAlignment = .right
+		itemValueField.font = UIFont(name: itemValueField.font!.fontName, size: 21)
+		itemValueField.text = String(item.value)
+		itemValueField.keyboardType = UIKeyboardType.numberPad
+
+		unitLabel.frame = CGRect(x: size.width * 0.875, y: size.height * 0.05,
+		                         width: size.width * 0.075, height: size.height * 0.9)
+		unitLabel.font = UIFont(name: itemValueField.font!.fontName, size: 21)
+		unitLabel.text = "円"
+
+		self.contentView.addSubview(itemNameField)
+		self.contentView.addSubview(itemValueField)
+		self.contentView.addSubview(unitLabel)
 	}
 
 }

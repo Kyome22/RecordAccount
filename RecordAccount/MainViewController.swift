@@ -16,6 +16,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var mainTable: UITableView!
 	@IBOutlet weak var uploadButton: UIButton!
 	@IBOutlet weak var recordButton: UIButton!
+	private var circle = CircleView()
 
 	private var items = [Item]()
 	private var downFlag: Bool = true
@@ -32,6 +33,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainTable.delegate = self
 		mainTable.dataSource = self
 		mainTable.backgroundColor = UIColor.clear
+		view.addSubview(circle)
+		view.sendSubview(toBack: circle)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +44,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainTable.alpha = 0.0
 		mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
 		                         width: size.width * 0.8, height: 0)
+		mainTable.separatorColor = UIColor.clear
+
 		uploadButton.alpha = 0.0
 		uploadButton.isEnabled = false
 		uploadButton.backgroundColor = UIColor(hex: "ECEFF1")
@@ -50,6 +55,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		recordButton.isEnabled = false
 		recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
 		                            width: size.width * 0.75, height: size.width * 0.75)
+		circle.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
+		                      width: size.width * 0.75, height: size.width * 0.75)
 
 		//スキーマを変えてしまった時
 //		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
@@ -114,6 +121,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		removeItemAnimation()
 	}
 
+	@IBAction func tapView(_ sender: Any) {
+		self.view.endEditing(true)
+		for (index, item) in items.enumerated() {
+			let cell: MainCustomTableViewCell = mainTable.cellForRow(at: IndexPath(row: 0, section: index)) as! MainCustomTableViewCell
+			print("name: \(cell.itemNameField.text!) value: \(cell.itemValueField.text!)")
+			item.name = cell.itemNameField.text!
+			item.value = Int(cell.itemValueField.text!)!
+		}
+	}
+
 	func startRecording() throws {
 		if let recognitionTask = recognitionTask {
 			recognitionTask.cancel()
@@ -144,6 +161,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 			if error != nil || isFinal {
 				self.audioEngine.stop()
+				self.circle.stop()
 				inputNode.removeTap(onBus: 0)
 				self.recognitionRequest = nil
 				self.recognitionTask = nil
@@ -160,9 +178,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		audioEngine.prepare()
 		try audioEngine.start()
 		recordButton.setImage(UIImage(named: "stop.png"), for: .normal)
+		circle.start()
 		timer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: false, block: { (t) in
 			if self.audioEngine.isRunning {
 				self.audioEngine.stop()
+				self.circle.stop()
 				self.recognitionRequest?.endAudio()
 			}
 		})
@@ -174,6 +194,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			if audioEngine.isRunning {
 				timer?.invalidate()
 				audioEngine.stop()
+				circle.stop()
 				recognitionRequest?.endAudio()
 			} else {
 				try! startRecording()
@@ -193,6 +214,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		UIView.animate(withDuration: 1.0, animations: {
 			self.recordButton.frame = CGRect(x: size.width * 0.25, y: size.height * 0.5 + size.width * 0.125,
 			                                 width: size.width * 0.5, height: size.width * 0.5)
+			self.circle.frame = CGRect(x: size.width * 0.25, y: size.height * 0.5 + size.width * 0.125,
+			                                 width: size.width * 0.5, height: size.width * 0.5)
 		})
 	}
 
@@ -200,6 +223,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let size: CGRect = view.bounds
 		UIView.animate(withDuration: 1.0, animations: {
 			self.recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
+			                                 width: size.width * 0.75, height: size.width * 0.75)
+			self.circle.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
 			                                 width: size.width * 0.75, height: size.width * 0.75)
 		})
 	}

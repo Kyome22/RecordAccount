@@ -10,6 +10,10 @@
 		7708DACD1EB4CCBF00820784 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */; };
 		770C4C051EB42BC400F377F2 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C4C041EB42BC400F377F2 /* Realm.framework */; };
 		772710361EB73AFD00CF8258 /* ItemCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */; };
+		7748B4A51EC9832400085472 /* hint_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A31EC9832400085472 /* hint_50.png */; };
+		7748B4A61EC9832400085472 /* hint_75.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A41EC9832400085472 /* hint_75.png */; };
+		7748B4A81EC9860F00085472 /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7748B4A71EC9860F00085472 /* HintViewController.swift */; };
+		774ADBC21EC6DF7400AA5341 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774ADBC11EC6DF7400AA5341 /* CircleView.swift */; };
 		7796F2C41EB33C4C0055FDA5 /* reco.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BB1EB33C4C0055FDA5 /* reco.png */; };
 		7796F2C51EB33C4C0055FDA5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BC1EB33C4C0055FDA5 /* stop.png */; };
 		7796F2CE1EB35DA60055FDA5 /* recoacc_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2C71EB35DA60055FDA5 /* recoacc_120.png */; };
@@ -51,6 +55,10 @@
 		7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "Pods/../build/Debug-iphoneos/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
 		770C4C041EB42BC400F377F2 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
 		772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomTableViewCell.swift; sourceTree = "<group>"; };
+		7748B4A31EC9832400085472 /* hint_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_50.png; sourceTree = "<group>"; };
+		7748B4A41EC9832400085472 /* hint_75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_75.png; sourceTree = "<group>"; };
+		7748B4A71EC9860F00085472 /* HintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
+		774ADBC11EC6DF7400AA5341 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7796F2BB1EB33C4C0055FDA5 /* reco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reco.png; sourceTree = "<group>"; };
 		7796F2BC1EB33C4C0055FDA5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		7796F2C71EB35DA60055FDA5 /* recoacc_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recoacc_120.png; sourceTree = "<group>"; };
@@ -119,6 +127,8 @@
 				7796F2DC1EB3687F0055FDA5 /* logs_75.png */,
 				7796F2DD1EB3687F0055FDA5 /* record_50.png */,
 				7796F2DE1EB3687F0055FDA5 /* record_75.png */,
+				7748B4A31EC9832400085472 /* hint_50.png */,
+				7748B4A41EC9832400085472 /* hint_75.png */,
 				7796F2D91EB365C90055FDA5 /* launch.png */,
 				7796F2BB1EB33C4C0055FDA5 /* reco.png */,
 				7796F2BC1EB33C4C0055FDA5 /* stop.png */,
@@ -178,12 +188,14 @@
 				7796F2FD1EB385B70055FDA5 /* UIColorCode.swift */,
 				77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */,
 				7796F2FB1EB380E90055FDA5 /* AnimatorMoveLeft.swift */,
+				774ADBC11EC6DF7400AA5341 /* CircleView.swift */,
 				77F2FCEE1EAB4C8C00131C61 /* MainViewController.swift */,
 				7796F3031EB3CE8D0055FDA5 /* TableViewController.swift */,
 				7796F3051EB3D0920055FDA5 /* EditViewController.swift */,
 				7796F2FF1EB3917F0055FDA5 /* MainCustomTableViewCell.swift */,
 				77E3C8991EB45D36002C88CC /* DateCustomTableViewCell.swift */,
 				772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */,
+				7748B4A71EC9860F00085472 /* HintViewController.swift */,
 				7796F3011EB3925D0055FDA5 /* Item.swift */,
 				77E3C8971EB4346D002C88CC /* RecordAccountRealmObject.swift */,
 				77F2FCF01EAB4C8C00131C61 /* Main.storyboard */,
@@ -284,7 +296,9 @@
 				7796F2C41EB33C4C0055FDA5 /* reco.png in Resources */,
 				7796F2E01EB3687F0055FDA5 /* logs_75.png in Resources */,
 				77F2FCF41EAB4C8C00131C61 /* Assets.xcassets in Resources */,
+				7748B4A61EC9832400085472 /* hint_75.png in Resources */,
 				77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */,
+				7748B4A51EC9832400085472 /* hint_50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,12 +359,14 @@
 			files = (
 				7796F2FC1EB380E90055FDA5 /* AnimatorMoveLeft.swift in Sources */,
 				77E3C89A1EB45D36002C88CC /* DateCustomTableViewCell.swift in Sources */,
+				7748B4A81EC9860F00085472 /* HintViewController.swift in Sources */,
 				772710361EB73AFD00CF8258 /* ItemCustomTableViewCell.swift in Sources */,
 				7796F3021EB3925D0055FDA5 /* Item.swift in Sources */,
 				7796F2FA1EB37DB10055FDA5 /* RAMItemAnimationProtocol.swift in Sources */,
 				7796F3151EB42A1A0055FDA5 /* RAMBounceAnimation.swift in Sources */,
 				7796F3131EB429460055FDA5 /* RAMBadge.swift in Sources */,
 				7796F3061EB3D0920055FDA5 /* EditViewController.swift in Sources */,
+				774ADBC21EC6DF7400AA5341 /* CircleView.swift in Sources */,
 				77F2FCEF1EAB4C8C00131C61 /* MainViewController.swift in Sources */,
 				77E3C8981EB4346D002C88CC /* RecordAccountRealmObject.swift in Sources */,
 				7796F3041EB3CE8D0055FDA5 /* TableViewController.swift in Sources */,

@@ -60,7 +60,11 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WGc-6y-Oc8" appends="YES" id="AsB-nF-RjI"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="記録する" image="record" id="fIa-KL-5tc" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
@@ -85,13 +89,18 @@
                 <customObject id="tbU-5M-SuL" customClass="RAMBounceAnimation" customModule="RecordAccount" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.0" green="0.53725490200000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customObject>
+                <tapGestureRecognizer id="WGc-6y-Oc8">
+                    <connections>
+                        <action selector="tapView:" destination="B1H-lf-tdZ" id="m22-h2-GlE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="902.89855072463774" y="387.22826086956525"/>
         </scene>
@@ -102,7 +111,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ciH-pG-nbh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -146,7 +155,7 @@
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DKe-MP-SY1">
                                         <rect key="frame" x="110" y="147" width="214" height="36"/>
-                                        <color key="backgroundColor" red="0.87835413217544556" green="0.87848073244094849" blue="0.87832647562026978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="0iK-nF-osY"/>
                                         </constraints>
@@ -255,7 +264,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ahn-Lu-JLl" firstAttribute="trailing" secondItem="dg5-gL-6oY" secondAttribute="trailingMargin" id="EGZ-j4-uyF"/>
@@ -292,7 +301,7 @@
                     <tabBarItem key="tabBarItem" title="記録を見る" image="logs" id="Giy-eL-MCa" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" red="0.26956862209999999" green="0.35323816540000003" blue="0.39074045419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" red="0.27058823529411763" green="0.3529411764705882" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                                 <color key="value" red="0.26956862209999999" green="0.35323816540000003" blue="0.39074045419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -314,15 +323,101 @@
                 <customObject id="98Z-M4-taI" customClass="RAMBounceAnimation" customModule="RecordAccount" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.24799117449999999" green="0.31693896649999997" blue="0.70930510759999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.0" green="0.53725490200000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
             <point key="canvasLocation" x="903" y="1310"/>
+        </scene>
+        <!--使い方-->
+        <scene sceneID="fNe-1e-7Ki">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="使い方" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Dl8-fU-84J" customClass="HintViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="使い方" image="hint" id="v0a-r9-9kd" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.27058823529999998" green="0.35294117650000001" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                <color key="value" red="0.27058823529999998" green="0.35294117650000001" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="0Bd-r2-FgY" id="6mt-V4-TcL"/>
+                        </connections>
+                    </tabBarItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4fl-lC-mQq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="0Bd-r2-FgY" customClass="RAMBounceAnimation" customModule="RecordAccount" customModuleProvider="target">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
+                            <color key="value" red="0.0" green="0.53725490200000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
+                            <color key="value" red="0.0" green="0.53725490200000003" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="903" y="2027"/>
+        </scene>
+        <!--FirstHint-->
+        <scene sceneID="uq4-Oc-TRx">
+            <objects>
+                <viewController storyboardIdentifier="FirstHint" title="FirstHint" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dbV-52-6qY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TlM-f6-jPt"/>
+                        <viewControllerLayoutGuide type="bottom" id="vsL-Fb-iwK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o9b-sU-d9w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zlp-BY-7TM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1658" y="2027"/>
+        </scene>
+        <!--SecondHint-->
+        <scene sceneID="eKl-me-I9Q">
+            <objects>
+                <viewController storyboardIdentifier="SecondHint" title="SecondHint" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bJR-Sg-u1F" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8H4-7I-3ew"/>
+                        <viewControllerLayoutGuide type="bottom" id="E01-Ti-hUK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eD6-Sz-LfB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.9529411793" blue="0.49019607900000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6LP-4T-KHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2419" y="2027"/>
+        </scene>
+        <!--ThirdHint-->
+        <scene sceneID="tvz-SA-hWf">
+            <objects>
+                <viewController storyboardIdentifier="ThirdHint" title="ThirdHint" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TRZ-bh-6ZX" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lzY-KD-vKg"/>
+                        <viewControllerLayoutGuide type="bottom" id="UjI-Ch-IfB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oUD-Fl-2Y3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.90203529599999999" green="0.72078830000000005" blue="0.71905529499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tan-xa-WJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3168" y="2027"/>
         </scene>
         <!--Animated Tab Bar Controller-->
         <scene sceneID="bl4-Yt-haZ">
@@ -336,6 +431,7 @@
                     <connections>
                         <segue destination="B1H-lf-tdZ" kind="relationship" relationship="viewControllers" id="FK7-mp-aGn"/>
                         <segue destination="KN0-Nx-xMi" kind="relationship" relationship="viewControllers" id="Krw-pq-hFX"/>
+                        <segue destination="Dl8-fU-84J" kind="relationship" relationship="viewControllers" id="wI2-jU-BAr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8g-vs-KIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -344,6 +440,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="hint" width="25" height="25"/>
         <image name="logs" width="25" height="25"/>
         <image name="reco.png" width="320" height="320"/>
         <image name="record" width="25" height="25"/>
