@@ -26,6 +26,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	private let audioEngine = AVAudioEngine()
 	private var timer: Timer? = nil
 	private var sentence: String = ""
+	private var itemRow: Int = 0
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,6 +42,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		super.viewWillAppear(animated)
 		downFlag = true
 		let size: CGRect = view.bounds
+		checkViewSize()
 		mainTable.alpha = 0.0
 		mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
 		                         width: size.width * 0.8, height: 0)
@@ -123,12 +125,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	@IBAction func tapView(_ sender: Any) {
 		self.view.endEditing(true)
-		for (index, item) in items.enumerated() {
-			let cell: MainCustomTableViewCell = mainTable.cellForRow(at: IndexPath(row: 0, section: index)) as! MainCustomTableViewCell
-			print("name: \(cell.itemNameField.text!) value: \(cell.itemValueField.text!)")
-			item.name = cell.itemNameField.text!
-			item.value = Int(cell.itemValueField.text!)!
-		}
 	}
 
 	func startRecording() throws {
@@ -189,6 +185,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	@IBAction func pushRecord(_ sender: Any) {
+//		addDummyItems()
 //		saveDummyItems()
 		if checkNetwork() {
 			if audioEngine.isRunning {
@@ -212,9 +209,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	func moveDownAnimation() {
 		let size: CGRect = view.bounds
 		UIView.animate(withDuration: 1.0, animations: {
-			self.recordButton.frame = CGRect(x: size.width * 0.25, y: size.height * 0.5 + size.width * 0.125,
+			self.recordButton.frame = CGRect(x: size.width * 0.25, y: size.height * 0.54 + size.width * 0.125,
 			                                 width: size.width * 0.5, height: size.width * 0.5)
-			self.circle.frame = CGRect(x: size.width * 0.25, y: size.height * 0.5 + size.width * 0.125,
+			self.circle.frame = CGRect(x: size.width * 0.25, y: size.height * 0.54 + size.width * 0.125,
 			                                 width: size.width * 0.5, height: size.width * 0.5)
 		})
 	}
@@ -230,7 +227,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func addItemAnimation() {
-		let count: Int = items.count < 5 ? items.count : 4
+		let count: Int = items.count <= itemRow ? items.count : itemRow
 		let fromPos: CGPoint = CGPoint(x: view.bounds.width * 0.1, y: view.bounds.height * 0.3)
 		let toPos1: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y - CGFloat(count) * 27.5)
 		let toPos2: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y + CGFloat(count) * 27.5 + 5)
@@ -363,9 +360,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func saveItemData() {
+		for (index, item) in items.enumerated() {
+			let cell: MainCustomTableViewCell = mainTable.cellForRow(at: IndexPath(item: 0, section: index)) as! MainCustomTableViewCell
+			print("name: \(cell.itemNameField.text!) value: \(cell.itemValueField.text!)")
+			item.name = cell.itemNameField.text!
+			item.value = Int(cell.itemValueField.text!)!
+		}
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
-		let date: String = formatter.string(from: Date())
+		var date: String = formatter.string(from: Date())
+		let weekday = Calendar.current.component(Calendar.Component.weekday, from: Date())
+		date += "-" + String(weekday)
 		do {
 			let realm = try Realm()
 			for item in items {
@@ -384,6 +389,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	//ダミー
+	func addDummyItems() {
+		items.append(Item(name: "うどん", value: 500))
+		items.append(Item(name: "そば", value: 500))
+		items.append(Item(name: "うどん", value: 500))
+		items.append(Item(name: "そば", value: 500))
+		items.append(Item(name: "うどん", value: 500))
+		items.append(Item(name: "そば", value: 500))
+		items.append(Item(name: "うどん", value: 500))
+		items.append(Item(name: "そば", value: 500))
+
+		mainTable.reloadData()
+		moveDownAnimation()
+		addItemAnimation()
+	}
+
 	func saveDummyItems() {
 		let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
 		let date0 = calendar.date(from: DateComponents(year: 2017, month: 4, day: 27))!
@@ -418,9 +438,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func makeItemModel(date: Date, name: String, value: Int) -> ItemModel {
+		let weekday = Calendar.current.component(Calendar.Component.weekday, from: date)
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
-		let dateStr: String = formatter.string(from: date)
+		let dateStr: String = formatter.string(from: date) + "-" + String(weekday)
 
 		let newItemModel = ItemModel()
 		newItemModel.date = dateStr
@@ -430,6 +451,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		return newItemModel
 	}
-	
+
+	func checkViewSize() {
+		let modelSize = self.view.frame.size
+		print(modelSize)
+		switch modelSize {
+		case CGSize(width: 320, height: 568):
+			itemRow = 4
+		case CGSize(width: 375, height: 667):
+			itemRow = 5
+		case CGSize(width: 414, height: 736):
+			itemRow = 6
+		default:
+			itemRow = 5
+		}
+	}
 }
 

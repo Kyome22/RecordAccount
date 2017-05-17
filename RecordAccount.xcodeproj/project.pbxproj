@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7708DACD1EB4CCBF00820784 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */; };
-		770C4C051EB42BC400F377F2 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 770C4C041EB42BC400F377F2 /* Realm.framework */; };
 		772710361EB73AFD00CF8258 /* ItemCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */; };
 		7748B4A51EC9832400085472 /* hint_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A31EC9832400085472 /* hint_50.png */; };
 		7748B4A61EC9832400085472 /* hint_75.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A41EC9832400085472 /* hint_75.png */; };
 		7748B4A81EC9860F00085472 /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7748B4A71EC9860F00085472 /* HintViewController.swift */; };
+		7748B4C71ECA484500085472 /* hint1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4C41ECA484500085472 /* hint1.png */; };
+		7748B4C81ECA484500085472 /* hint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4C51ECA484500085472 /* hint2.png */; };
+		7748B4C91ECA484500085472 /* hint3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4C61ECA484500085472 /* hint3.png */; };
 		774ADBC21EC6DF7400AA5341 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774ADBC11EC6DF7400AA5341 /* CircleView.swift */; };
 		7796F2C41EB33C4C0055FDA5 /* reco.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BB1EB33C4C0055FDA5 /* reco.png */; };
 		7796F2C51EB33C4C0055FDA5 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F2BC1EB33C4C0055FDA5 /* stop.png */; };
@@ -38,7 +39,6 @@
 		7796F3061EB3D0920055FDA5 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3051EB3D0920055FDA5 /* EditViewController.swift */; };
 		7796F3131EB429460055FDA5 /* RAMBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3121EB429460055FDA5 /* RAMBadge.swift */; };
 		7796F3151EB42A1A0055FDA5 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3141EB42A1A0055FDA5 /* RAMBounceAnimation.swift */; };
-		77E3C8961EB42D17002C88CC /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E3C8951EB42D17002C88CC /* RealmSwift.framework */; };
 		77E3C8981EB4346D002C88CC /* RecordAccountRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3C8971EB4346D002C88CC /* RecordAccountRealmObject.swift */; };
 		77E3C89A1EB45D36002C88CC /* DateCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3C8991EB45D36002C88CC /* DateCustomTableViewCell.swift */; };
 		77F2FCED1EAB4C8C00131C61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */; };
@@ -46,18 +46,16 @@
 		77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F2FCF01EAB4C8C00131C61 /* Main.storyboard */; };
 		77F2FCF41EAB4C8C00131C61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F2FCF31EAB4C8C00131C61 /* Assets.xcassets */; };
 		77F2FCF71EAB4C8C00131C61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F2FCF51EAB4C8C00131C61 /* LaunchScreen.storyboard */; };
-		A79580C1B4B9FE28F10F666C /* Pods_RecordAccount.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7797BEBFE76E029C442099 /* Pods_RecordAccount.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E9EBA8BC101BB365E0617CD /* Pods-RecordAccount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordAccount.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount.release.xcconfig"; sourceTree = "<group>"; };
-		6F7797BEBFE76E029C442099 /* Pods_RecordAccount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordAccount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "Pods/../build/Debug-iphoneos/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
-		770C4C041EB42BC400F377F2 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
 		772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomTableViewCell.swift; sourceTree = "<group>"; };
 		7748B4A31EC9832400085472 /* hint_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_50.png; sourceTree = "<group>"; };
 		7748B4A41EC9832400085472 /* hint_75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_75.png; sourceTree = "<group>"; };
 		7748B4A71EC9860F00085472 /* HintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
+		7748B4C41ECA484500085472 /* hint1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint1.png; sourceTree = "<group>"; };
+		7748B4C51ECA484500085472 /* hint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint2.png; sourceTree = "<group>"; };
+		7748B4C61ECA484500085472 /* hint3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint3.png; sourceTree = "<group>"; };
 		774ADBC11EC6DF7400AA5341 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7796F2BB1EB33C4C0055FDA5 /* reco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reco.png; sourceTree = "<group>"; };
 		7796F2BC1EB33C4C0055FDA5 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 		7796F3051EB3D0920055FDA5 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		7796F3121EB429460055FDA5 /* RAMBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBadge.swift; sourceTree = "<group>"; };
 		7796F3141EB42A1A0055FDA5 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
-		77E3C8951EB42D17002C88CC /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		77E3C8971EB4346D002C88CC /* RecordAccountRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAccountRealmObject.swift; sourceTree = "<group>"; };
 		77E3C8991EB45D36002C88CC /* DateCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCustomTableViewCell.swift; sourceTree = "<group>"; };
 		77F2FCE91EAB4C8C00131C61 /* RecordAccount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecordAccount.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +90,6 @@
 		77F2FCF31EAB4C8C00131C61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77F2FCF61EAB4C8C00131C61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77F2FCF81EAB4C8C00131C61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		831B65D4807D999DA89D858D /* Pods-RecordAccount.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordAccount.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,28 +97,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7708DACD1EB4CCBF00820784 /* MGSwipeTableCell.framework in Frameworks */,
-				77E3C8961EB42D17002C88CC /* RealmSwift.framework in Frameworks */,
-				770C4C051EB42BC400F377F2 /* Realm.framework in Frameworks */,
-				A79580C1B4B9FE28F10F666C /* Pods_RecordAccount.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58412D26A2CB2A4D7B9D8248 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				831B65D4807D999DA89D858D /* Pods-RecordAccount.debug.xcconfig */,
-				3E9EBA8BC101BB365E0617CD /* Pods-RecordAccount.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		7796F2BA1EB33C4C0055FDA5 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				7748B4C41ECA484500085472 /* hint1.png */,
+				7748B4C51ECA484500085472 /* hint2.png */,
+				7748B4C61ECA484500085472 /* hint3.png */,
 				7796F2DB1EB3687F0055FDA5 /* logs_50.png */,
 				7796F2DC1EB3687F0055FDA5 /* logs_75.png */,
 				7796F2DD1EB3687F0055FDA5 /* record_50.png */,
@@ -166,7 +152,6 @@
 			children = (
 				77F2FCEB1EAB4C8C00131C61 /* RecordAccount */,
 				77F2FCEA1EAB4C8C00131C61 /* Products */,
-				58412D26A2CB2A4D7B9D8248 /* Pods */,
 				ADB56C402EF25C825560F38F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -209,10 +194,6 @@
 		ADB56C402EF25C825560F38F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7708DACC1EB4CCBF00820784 /* MGSwipeTableCell.framework */,
-				77E3C8951EB42D17002C88CC /* RealmSwift.framework */,
-				770C4C041EB42BC400F377F2 /* Realm.framework */,
-				6F7797BEBFE76E029C442099 /* Pods_RecordAccount.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -224,12 +205,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77F2FCFB1EAB4C8C00131C61 /* Build configuration list for PBXNativeTarget "RecordAccount" */;
 			buildPhases = (
-				38662805170B340F87BA9A50 /* [CP] Check Pods Manifest.lock */,
 				77F2FCE51EAB4C8C00131C61 /* Sources */,
 				77F2FCE61EAB4C8C00131C61 /* Frameworks */,
 				77F2FCE71EAB4C8C00131C61 /* Resources */,
-				CFFBF498648579552ED79AEC /* [CP] Embed Pods Frameworks */,
-				3E8980EFA8E400F6DF3BBF0A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,61 +274,16 @@
 				7796F2C41EB33C4C0055FDA5 /* reco.png in Resources */,
 				7796F2E01EB3687F0055FDA5 /* logs_75.png in Resources */,
 				77F2FCF41EAB4C8C00131C61 /* Assets.xcassets in Resources */,
+				7748B4C71ECA484500085472 /* hint1.png in Resources */,
 				7748B4A61EC9832400085472 /* hint_75.png in Resources */,
+				7748B4C91ECA484500085472 /* hint3.png in Resources */,
 				77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */,
+				7748B4C81ECA484500085472 /* hint2.png in Resources */,
 				7748B4A51EC9832400085472 /* hint_50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		38662805170B340F87BA9A50 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3E8980EFA8E400F6DF3BBF0A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CFFBF498648579552ED79AEC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		77F2FCE51EAB4C8C00131C61 /* Sources */ = {
@@ -494,12 +427,12 @@
 		};
 		77F2FCFC1EAB4C8C00131C61 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 831B65D4807D999DA89D858D /* Pods-RecordAccount.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VJ5N2X84K8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = RecordAccount/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyome.RecordAccount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,12 +442,12 @@
 		};
 		77F2FCFD1EAB4C8C00131C61 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E9EBA8BC101BB365E0617CD /* Pods-RecordAccount.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VJ5N2X84K8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = RecordAccount/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyome.RecordAccount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
