@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="D9c-3G-ZhA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="D9c-3G-ZhA">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,16 +37,6 @@
                                 <rect key="frame" x="47" y="63" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" id="MXW-Tj-NcZ" customClass="MainCustomTableViewCell" customModule="RecordAccount" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MXW-Tj-NcZ" id="RJp-FE-J9I">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGk-Z2-gAW">
                                 <rect key="frame" x="47" y="153" width="320" height="45"/>
@@ -60,12 +50,13 @@
                                     <action selector="pushUpload:" destination="B1H-lf-tdZ" eventType="touchUpInside" id="JTg-9a-IBI"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="push.png" translatesAutoresizingMaskIntoConstraints="NO" id="iV4-iP-HjZ">
+                                <rect key="frame" x="92" y="506" width="230" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="WGc-6y-Oc8" appends="YES" id="AsB-nF-RjI"/>
-                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="記録する" image="record" id="fIa-KL-5tc" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
@@ -81,6 +72,7 @@
                         </connections>
                     </tabBarItem>
                     <connections>
+                        <outlet property="attentionImage" destination="iV4-iP-HjZ" id="klo-Fa-Rk7"/>
                         <outlet property="mainTable" destination="OhH-5T-7RI" id="MXN-qx-F5b"/>
                         <outlet property="recordButton" destination="0jS-K3-cJC" id="ZOH-DO-K9I"/>
                         <outlet property="uploadButton" destination="mGk-Z2-gAW" id="8Ba-Gh-BZh"/>
@@ -97,11 +89,6 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customObject>
-                <tapGestureRecognizer id="WGc-6y-Oc8">
-                    <connections>
-                        <action selector="tapView:" destination="B1H-lf-tdZ" id="m22-h2-GlE"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="902.89855072463774" y="387.22826086956525"/>
         </scene>
@@ -115,16 +102,6 @@
                         <color key="backgroundColor" red="0.0" green="0.53725490196078429" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dateCell" id="UWu-1X-TsG" customClass="TableCustomTableViewCell" customModule="RecordAccount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UWu-1X-TsG" id="VOV-c2-NWx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="fkM-9I-XPP" id="j5x-GC-ctg"/>
                             <outlet property="delegate" destination="fkM-9I-XPP" id="Bei-Zb-YdC"/>
@@ -299,7 +276,7 @@
         <scene sceneID="aee-jd-T9f">
             <objects>
                 <navigationController id="KN0-Nx-xMi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="記録を見る" image="logs" id="Giy-eL-MCa" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" tag="1" title="記録を見る" image="logs" id="Giy-eL-MCa" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" red="0.27058823529411763" green="0.3529411764705882" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -338,7 +315,7 @@
         <scene sceneID="fNe-1e-7Ki">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" title="使い方" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Dl8-fU-84J" customClass="HintViewController" customModule="RecordAccount" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="使い方" image="hint" id="v0a-r9-9kd" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" tag="2" title="使い方" image="hint" id="v0a-r9-9kd" customClass="RAMAnimatedTabBarItem" customModule="RecordAccount" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" red="0.27058823529999998" green="0.35294117650000001" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -485,6 +462,7 @@
         <image name="hint2.png" width="1242" height="1242"/>
         <image name="hint3.png" width="1242" height="1242"/>
         <image name="logs" width="25" height="25"/>
+        <image name="push.png" width="600" height="221"/>
         <image name="reco.png" width="320" height="320"/>
         <image name="record" width="25" height="25"/>
     </resources>

@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5359D363FD69FE0EFDF66ACC /* Pods_RecordAccount.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C437FD6937BCDE997FA292 /* Pods_RecordAccount.framework */; };
 		772710361EB73AFD00CF8258 /* ItemCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */; };
+		772C46801ECC076D002C4224 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772C467F1ECC076D002C4224 /* MGSwipeTableCell.framework */; };
+		772C46821ECC0772002C4224 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772C46811ECC0772002C4224 /* Realm.framework */; };
+		772C46841ECC0777002C4224 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 772C46831ECC0777002C4224 /* RealmSwift.framework */; };
 		7748B4A51EC9832400085472 /* hint_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A31EC9832400085472 /* hint_50.png */; };
 		7748B4A61EC9832400085472 /* hint_75.png in Resources */ = {isa = PBXBuildFile; fileRef = 7748B4A41EC9832400085472 /* hint_75.png */; };
 		7748B4A81EC9860F00085472 /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7748B4A71EC9860F00085472 /* HintViewController.swift */; };
@@ -41,6 +45,7 @@
 		7796F3151EB42A1A0055FDA5 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796F3141EB42A1A0055FDA5 /* RAMBounceAnimation.swift */; };
 		77E3C8981EB4346D002C88CC /* RecordAccountRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3C8971EB4346D002C88CC /* RecordAccountRealmObject.swift */; };
 		77E3C89A1EB45D36002C88CC /* DateCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3C8991EB45D36002C88CC /* DateCustomTableViewCell.swift */; };
+		77EE24EC1ECECC6F00BE4EFD /* push.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EE24EB1ECECC6F00BE4EFD /* push.png */; };
 		77F2FCED1EAB4C8C00131C61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */; };
 		77F2FCEF1EAB4C8C00131C61 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2FCEE1EAB4C8C00131C61 /* MainViewController.swift */; };
 		77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F2FCF01EAB4C8C00131C61 /* Main.storyboard */; };
@@ -49,7 +54,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33C437FD6937BCDE997FA292 /* Pods_RecordAccount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordAccount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		772710351EB73AFD00CF8258 /* ItemCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomTableViewCell.swift; sourceTree = "<group>"; };
+		772C467F1ECC076D002C4224 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "Pods/../build/Debug-iphoneos/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
+		772C46811ECC0772002C4224 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
+		772C46831ECC0777002C4224 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		7748B4A31EC9832400085472 /* hint_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_50.png; sourceTree = "<group>"; };
 		7748B4A41EC9832400085472 /* hint_75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint_75.png; sourceTree = "<group>"; };
 		7748B4A71EC9860F00085472 /* HintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +92,7 @@
 		7796F3141EB42A1A0055FDA5 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		77E3C8971EB4346D002C88CC /* RecordAccountRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAccountRealmObject.swift; sourceTree = "<group>"; };
 		77E3C8991EB45D36002C88CC /* DateCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCustomTableViewCell.swift; sourceTree = "<group>"; };
+		77EE24EB1ECECC6F00BE4EFD /* push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = push.png; sourceTree = "<group>"; };
 		77F2FCE91EAB4C8C00131C61 /* RecordAccount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecordAccount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F2FCEC1EAB4C8C00131C61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77F2FCEE1EAB4C8C00131C61 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +100,8 @@
 		77F2FCF31EAB4C8C00131C61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77F2FCF61EAB4C8C00131C61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77F2FCF81EAB4C8C00131C61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC51AC648E496AD8EABB64EC /* Pods-RecordAccount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordAccount.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount.release.xcconfig"; sourceTree = "<group>"; };
+		D2270D3A0F845EAD872B1392 /* Pods-RecordAccount.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordAccount.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,15 +109,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772C46841ECC0777002C4224 /* RealmSwift.framework in Frameworks */,
+				772C46821ECC0772002C4224 /* Realm.framework in Frameworks */,
+				772C46801ECC076D002C4224 /* MGSwipeTableCell.framework in Frameworks */,
+				5359D363FD69FE0EFDF66ACC /* Pods_RecordAccount.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25F64D021480A72A6C6D4899 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2270D3A0F845EAD872B1392 /* Pods-RecordAccount.debug.xcconfig */,
+				CC51AC648E496AD8EABB64EC /* Pods-RecordAccount.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7796F2BA1EB33C4C0055FDA5 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				77EE24EB1ECECC6F00BE4EFD /* push.png */,
 				7748B4C41ECA484500085472 /* hint1.png */,
 				7748B4C51ECA484500085472 /* hint2.png */,
 				7748B4C61ECA484500085472 /* hint3.png */,
@@ -153,6 +179,7 @@
 				77F2FCEB1EAB4C8C00131C61 /* RecordAccount */,
 				77F2FCEA1EAB4C8C00131C61 /* Products */,
 				ADB56C402EF25C825560F38F /* Frameworks */,
+				25F64D021480A72A6C6D4899 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +221,10 @@
 		ADB56C402EF25C825560F38F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				772C46831ECC0777002C4224 /* RealmSwift.framework */,
+				772C46811ECC0772002C4224 /* Realm.framework */,
+				772C467F1ECC076D002C4224 /* MGSwipeTableCell.framework */,
+				33C437FD6937BCDE997FA292 /* Pods_RecordAccount.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,9 +236,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77F2FCFB1EAB4C8C00131C61 /* Build configuration list for PBXNativeTarget "RecordAccount" */;
 			buildPhases = (
+				881AFD2839BA7CEAA7CF4652 /* [CP] Check Pods Manifest.lock */,
 				77F2FCE51EAB4C8C00131C61 /* Sources */,
 				77F2FCE61EAB4C8C00131C61 /* Frameworks */,
 				77F2FCE71EAB4C8C00131C61 /* Resources */,
+				85D2C41EF3AA7ECC2122D7AE /* [CP] Embed Pods Frameworks */,
+				81AA93C8A9F2C325987A0FFC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,11 +313,60 @@
 				7748B4C91ECA484500085472 /* hint3.png in Resources */,
 				77F2FCF21EAB4C8C00131C61 /* Main.storyboard in Resources */,
 				7748B4C81ECA484500085472 /* hint2.png in Resources */,
+				77EE24EC1ECECC6F00BE4EFD /* push.png in Resources */,
 				7748B4A51EC9832400085472 /* hint_50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		81AA93C8A9F2C325987A0FFC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85D2C41EF3AA7ECC2122D7AE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecordAccount/Pods-RecordAccount-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		881AFD2839BA7CEAA7CF4652 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		77F2FCE51EAB4C8C00131C61 /* Sources */ = {
@@ -373,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -417,7 +500,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -427,6 +510,7 @@
 		};
 		77F2FCFC1EAB4C8C00131C61 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2270D3A0F845EAD872B1392 /* Pods-RecordAccount.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VJ5N2X84K8;
@@ -442,6 +526,7 @@
 		};
 		77F2FCFD1EAB4C8C00131C61 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC51AC648E496AD8EABB64EC /* Pods-RecordAccount.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VJ5N2X84K8;

@@ -11,13 +11,15 @@ import Speech
 import RealmSwift
 import SystemConfiguration
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SFSpeechRecognizerDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SFSpeechRecognizerDelegate, MainCustomTableViewCellDelegate {
 
 	@IBOutlet weak var mainTable: UITableView!
 	@IBOutlet weak var uploadButton: UIButton!
 	@IBOutlet weak var recordButton: UIButton!
+	@IBOutlet weak var attentionImage: UIImageView!
 	private var circle = CircleView()
 
+	private var first: Bool = true
 	private var items = [Item]()
 	private var downFlag: Bool = true
 	private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
@@ -27,6 +29,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	private var timer: Timer? = nil
 	private var sentence: String = ""
 	private var itemRow: Int = 0
+	private var accessMainTable: Bool = false
+
+	private let DEBUG: Int = 0 //release: 0, changed schema: 1, add dummy items: 2, save dummy items: 3
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,95 +41,115 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainTable.backgroundColor = UIColor.clear
 		view.addSubview(circle)
 		view.sendSubview(toBack: circle)
+		first = true
+		downFlag = true
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		downFlag = true
-		let size: CGRect = view.bounds
-		checkViewSize()
-		mainTable.alpha = 0.0
-		mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
-		                         width: size.width * 0.8, height: 0)
-		mainTable.separatorColor = UIColor.clear
+		if first {
+			let size: CGRect = view.bounds
+			checkViewSize()
+			mainTable.alpha = 0.0
+			mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
+			                         width: size.width * 0.8, height: 0)
+			mainTable.separatorColor = UIColor.clear
 
-		uploadButton.alpha = 0.0
-		uploadButton.isEnabled = false
-		uploadButton.backgroundColor = UIColor(hex: "ECEFF1")
-		uploadButton.layer.cornerRadius = 10
-		uploadButton.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3 + 5,
-		                            width: size.width * 0.8, height: 45)
-		recordButton.isEnabled = false
-		recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
-		                            width: size.width * 0.75, height: size.width * 0.75)
-		circle.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
-		                      width: size.width * 0.75, height: size.width * 0.75)
+			uploadButton.alpha = 0.0
+			uploadButton.isEnabled = false
+			mainTable.isUserInteractionEnabled = false
+			uploadButton.backgroundColor = UIColor(hex: "ECEFF1")
+			uploadButton.layer.cornerRadius = 10
+			uploadButton.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3 + 5,
+			                            width: size.width * 0.8, height: 45)
+			recordButton.isEnabled = false
+			recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
+			                            width: size.width * 0.75, height: size.width * 0.75)
+			circle.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
+			                      width: size.width * 0.75, height: size.width * 0.75)
 
-		//スキーマを変えてしまった時
-//		if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-//			try! FileManager.default.removeItem(at: fileURL)
-//		}
+			attentionImage.frame = CGRect(x: size.width * 0.2, y: size.height * 0.5 + size.width * 0.36,
+			                              width: size.width * 0.6, height: size.width * 0.221)
+			attentionImage.alpha = 0.0
 
+
+			if DEBUG == 1 {
+				if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+					try! FileManager.default.removeItem(at: fileURL)
+				}
+			}
+		}
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		var audioFlag: Bool = false
-		var speechFlag: Bool = false
+		if first {
+			var audioFlag: Bool = false
+			var speechFlag: Bool = false
 
-		let semaphore = DispatchSemaphore(value: 0)
+			let semaphore = DispatchSemaphore(value: 0)
 
-		AVAudioSession.sharedInstance().requestRecordPermission( { (granted: Bool) -> Void in
-			if granted {
-				audioFlag = true
-			} else {
-				let alert =	UIAlertController(title: "マイク使用不可",
-				           	                  message: "[設定]にてマイクの使用を許可してください。",
-				           	                  preferredStyle: .alert)
-				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-				alert.addAction(action)
-				self.present(alert, animated: true, completion: nil)
+			AVAudioSession.sharedInstance().requestRecordPermission( { (granted: Bool) -> Void in
+				if granted {
+					audioFlag = true
+				} else {
+					let alert =	UIAlertController(title: "マイク使用不可",
+					           	                  message: "[設定]にてマイクの使用を許可してください。",
+					           	                  preferredStyle: .alert)
+					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+					alert.addAction(action)
+					self.present(alert, animated: true, completion: nil)
+				}
+				semaphore.signal()
+			})
+
+			SFSpeechRecognizer.requestAuthorization { (status) in
+				if status == .authorized {
+					speechFlag = true
+				} else {
+					let alert =	UIAlertController(title: "音声認識使用不可",
+					           	                  message: "[設定]にて音声認識を許可してください。",
+					           	                  preferredStyle: .alert)
+					let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+					alert.addAction(action)
+					self.present(alert, animated: true, completion: nil)
+				}
+				semaphore.signal()
 			}
-			semaphore.signal()
-		})
 
-		SFSpeechRecognizer.requestAuthorization { (status) in
-			if status == .authorized {
-				speechFlag = true
-			} else {
-				let alert =	UIAlertController(title: "音声認識使用不可",
-				           	                  message: "[設定]にて音声認識を許可してください。",
-				           	                  preferredStyle: .alert)
-				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-				alert.addAction(action)
-				self.present(alert, animated: true, completion: nil)
+			semaphore.wait()
+			semaphore.wait()
+			recordButton.isEnabled = audioFlag && speechFlag
+			if audioFlag && speechFlag {
+				fadeAnimation(io: true)
 			}
-			semaphore.signal()
+			first = false
 		}
-
-		semaphore.wait()
-		semaphore.wait()
-		recordButton.isEnabled = audioFlag && speechFlag
-	}
-
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		items.removeAll()
-		mainTable.reloadData()
 	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
 
-	@IBAction func pushUpload(_ sender: Any) {
-		saveItemData()
-		moveUpAnimation()
-		removeItemAnimation()
+	func willstartEditing() {
+		self.uploadButton.isEnabled = false
+		self.mainTable.isUserInteractionEnabled = false
 	}
 
-	@IBAction func tapView(_ sender: Any) {
-		self.view.endEditing(true)
+	func didEndEditing(section: Int, name: String, value: Int) {
+		items[section].name = name
+		items[section].value = value
+		self.uploadButton.isEnabled = true
+		self.mainTable.isUserInteractionEnabled = true
+	}
+
+	func removeCell(section: Int) {
+		removeItemAnimation(all: false, section: section)
+	}
+
+	@IBAction func pushUpload(_ sender: Any) {
+		saveItemData()
+		removeItemAnimation(all: true)
 	}
 
 	func startRecording() throws {
@@ -162,6 +187,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 				self.recognitionRequest = nil
 				self.recognitionTask = nil
 				self.appendItem()
+				self.uploadButton.isEnabled = true
+				self.mainTable.isUserInteractionEnabled = true
 				self.recordButton.setImage(UIImage(named: "reco.png"), for: .normal)
 			}
 		}
@@ -185,30 +212,43 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	@IBAction func pushRecord(_ sender: Any) {
-//		addDummyItems()
-//		saveDummyItems()
-		if checkNetwork() {
-			if audioEngine.isRunning {
-				timer?.invalidate()
-				audioEngine.stop()
-				circle.stop()
-				recognitionRequest?.endAudio()
-			} else {
-				try! startRecording()
-			}
+		if DEBUG == 2 {
+			addDummyItems()
+		} else if DEBUG == 3 {
+			saveDummyItems()
 		} else {
-			let alert =	UIAlertController(title: "ネットワークエラー",
-			           	                  message: "インターネットに接続してください。",
-			           	                  preferredStyle: .alert)
-			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-			alert.addAction(action)
-			self.present(alert, animated: true, completion: nil)
+			if checkNetwork() {
+				if audioEngine.isRunning {
+					timer?.invalidate()
+					audioEngine.stop()
+					circle.stop()
+					recognitionRequest?.endAudio()
+				} else {
+					try! startRecording()
+					uploadButton.isEnabled = false
+					mainTable.isUserInteractionEnabled = false
+					fadeAnimation(io: false)
+				}
+			} else {
+				let alert =	UIAlertController(title: "ネットワークエラー",
+				           	                  message: "インターネットに接続してください。",
+				           	                  preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+				alert.addAction(action)
+				self.present(alert, animated: true, completion: nil)
+			}
 		}
+	}
+
+	func fadeAnimation(io: Bool) {
+		UIView.animate(withDuration: 0.4, animations: {
+			self.attentionImage.alpha = io ? 1.0 : 0.0
+		})
 	}
 
 	func moveDownAnimation() {
 		let size: CGRect = view.bounds
-		UIView.animate(withDuration: 1.0, animations: {
+		UIView.animate(withDuration: 0.7, animations: {
 			self.recordButton.frame = CGRect(x: size.width * 0.25, y: size.height * 0.54 + size.width * 0.125,
 			                                 width: size.width * 0.5, height: size.width * 0.5)
 			self.circle.frame = CGRect(x: size.width * 0.25, y: size.height * 0.54 + size.width * 0.125,
@@ -218,12 +258,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	func moveUpAnimation() {
 		let size: CGRect = view.bounds
-		UIView.animate(withDuration: 1.0, animations: {
+		UIView.animate(withDuration: 0.7, animations: { 
 			self.recordButton.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
 			                                 width: size.width * 0.75, height: size.width * 0.75)
 			self.circle.frame = CGRect(x: size.width * 0.125, y: size.height * 0.5 - size.width * 0.375,
-			                                 width: size.width * 0.75, height: size.width * 0.75)
-		})
+			                           width: size.width * 0.75, height: size.width * 0.75)
+		}) { (finished) in
+			self.fadeAnimation(io: true)
+		}
 	}
 
 	func addItemAnimation() {
@@ -232,7 +274,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let toPos1: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y - CGFloat(count) * 27.5)
 		let toPos2: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y + CGFloat(count) * 27.5 + 5)
 
-		UIView.animate(withDuration: 1.0, animations: {
+		UIView.animate(withDuration: 0.7, animations: {
 			self.mainTable.alpha = 1.0
 			self.uploadButton.alpha = 1.0
 			self.mainTable.frame = CGRect(x: toPos1.x, y: toPos1.y,
@@ -242,6 +284,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}) { (finished) in
 			if self.downFlag {
 				self.uploadButton.isEnabled = true
+				self.mainTable.isUserInteractionEnabled = true
 				self.downFlag = false
 			}
 			let indexPath: IndexPath = IndexPath(row: 0, section: self.items.count - 1)
@@ -249,20 +292,42 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 
-	func removeItemAnimation() {
-		uploadButton.isEnabled = false
-		items.removeAll()
-		let size: CGRect = view.bounds
-		UIView.animate(withDuration: 1.0, animations: {
-			self.mainTable.alpha = 0.0
-			self.mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
-			                              width: size.width * 0.8, height: 0)
-			self.uploadButton.alpha = 0.0
-			self.uploadButton.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3 + 5,
-			                                 width: size.width * 0.8, height: 45)
-		}) { (finished) in
-			self.downFlag = true
-			self.mainTable.reloadData()
+	func removeItemAnimation(all: Bool, section: Int = 0) {
+		if all || items.count - 1 == 0 {
+			uploadButton.isEnabled = false
+			items.removeAll()
+			let size: CGRect = view.bounds
+			UIView.animate(withDuration: 0.3, animations: {
+				self.mainTable.alpha = 0.0
+				self.mainTable.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3,
+				                              width: size.width * 0.8, height: 0)
+				self.uploadButton.alpha = 0.0
+				self.uploadButton.frame = CGRect(x: size.width * 0.1, y: size.height * 0.3 + 5,
+				                                 width: size.width * 0.8, height: 45)
+			}) { (finished) in
+				self.downFlag = true
+				self.mainTable.reloadData()
+				self.moveUpAnimation()
+			}
+		} else {
+			self.items.remove(at: section)
+			self.mainTable.deleteSections(IndexSet(integer: section), with: .left)
+			UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseIn, animations: {
+				let count: Int = self.items.count <= self.itemRow ? self.items.count : self.itemRow
+				let fromPos: CGPoint = CGPoint(x: self.view.bounds.width * 0.1, y: self.view.bounds.height * 0.3)
+				let toPos1: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y - CGFloat(count) * 27.5)
+				let toPos2: CGPoint = CGPoint(x: fromPos.x, y: fromPos.y + CGFloat(count) * 27.5 + 5)
+				self.mainTable.frame = CGRect(x: toPos1.x, y: toPos1.y,
+				                              width: self.mainTable.frame.width, height: CGFloat(count * 55))
+				self.uploadButton.frame = CGRect(x: toPos2.x, y: toPos2.y,
+				                                 width: self.uploadButton.frame.width, height: 45)
+			}, completion: { (finished) in
+				let indexPath: IndexPath = IndexPath(row: 0, section: self.items.count - 1)
+				self.mainTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.none, animated: true)
+			})
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+				self.mainTable.reloadData()
+			})
 		}
 	}
 
@@ -308,6 +373,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 				moveDownAnimation()
 			}
 			addItemAnimation()
+		} else {
+			if downFlag {
+				self.fadeAnimation(io: true)
+			}
 		}
 	}
 
@@ -342,8 +411,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = mainTable.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainCustomTableViewCell
-		cell.setCell(item: items[indexPath.section])
+		let cell =	MainCustomTableViewCell()
+		cell.setCell(section: indexPath.section, item: items[indexPath.section], width: mainTable.frame.width)
+		cell.delegate = self
 		return cell
 	}
 
@@ -360,12 +430,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 
 	func saveItemData() {
-		for (index, item) in items.enumerated() {
-			let cell: MainCustomTableViewCell = mainTable.cellForRow(at: IndexPath(item: 0, section: index)) as! MainCustomTableViewCell
-			print("name: \(cell.itemNameField.text!) value: \(cell.itemValueField.text!)")
-			item.name = cell.itemNameField.text!
-			item.value = Int(cell.itemValueField.text!)!
-		}
 		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
 		var date: String = formatter.string(from: Date())
@@ -390,17 +454,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	//ダミー
 	func addDummyItems() {
-		items.append(Item(name: "うどん", value: 500))
-		items.append(Item(name: "そば", value: 500))
-		items.append(Item(name: "うどん", value: 500))
-		items.append(Item(name: "そば", value: 500))
-		items.append(Item(name: "うどん", value: 500))
-		items.append(Item(name: "そば", value: 500))
-		items.append(Item(name: "うどん", value: 500))
-		items.append(Item(name: "そば", value: 500))
+		items.append(Item(name: "うどん", value: 300))
+		items.append(Item(name: "飲み物", value: 140))
+		items.append(Item(name: "駐輪場代", value: 150))
 
 		mainTable.reloadData()
-		moveDownAnimation()
+		if downFlag {
+			moveDownAnimation()
+		}
 		addItemAnimation()
 	}
 
@@ -454,7 +515,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	func checkViewSize() {
 		let modelSize = self.view.frame.size
-		print(modelSize)
 		switch modelSize {
 		case CGSize(width: 320, height: 568):
 			itemRow = 4

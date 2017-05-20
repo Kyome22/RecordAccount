@@ -12,9 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	let userDefaults = UserDefaults.standard
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		setStatusBarBackgroundColor(color: UIColor(hex: "CFD8DC"))
+		userDefaults.register(defaults: ["first" : true])
+		if userDefaults.bool(forKey: "first") {
+			if let vc = self.window?.rootViewController as? RAMAnimatedTabBarController {
+				vc.selectedIndex = 2
+				vc.setSelectIndex(from: 0, to: 2)
+				userDefaults.set(false, forKey: "first")
+			}
+		}
 		return true
 	}
 

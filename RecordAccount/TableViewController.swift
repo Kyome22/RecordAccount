@@ -15,6 +15,8 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 	private var itemModels: Results<ItemModel>!
 	private var sections = [(date: String, items: [(uuid: String, name: String, value: Int)], extended: Bool)]()
 
+	private let DEBUG: Bool = false //release: false, develop: true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		do {
@@ -29,8 +31,9 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		separateItemModels()
-
-		printSections()
+		if DEBUG {
+			printSections()
+		}
 	}
 
     override func didReceiveMemoryWarning() {
@@ -59,12 +62,12 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 
 		if indexPath.row == 0 {
 			cell = DateCustomTableViewCell(style: .default, reuseIdentifier: "dateCell")
-			(cell as! DateCustomTableViewCell).setCell(date: sections[indexPath.section].date)
+			(cell as! DateCustomTableViewCell).setCell(date: sections[indexPath.section].date, width: self.view.frame.width)
  		} else {
 			cell = ItemCustomTableViewCell(style: .default, reuseIdentifier: "itemCell")
 			let name: String = sections[indexPath.section].items[indexPath.row - 1].1
 			let value: Int = sections[indexPath.section].items[indexPath.row - 1].2
-			(cell as! ItemCustomTableViewCell).setCell(item: Item(name: name, value: value))
+			(cell as! ItemCustomTableViewCell).setCell(item: Item(name: name, value: value), width: self.view.frame.width)
 		}
 
 		let editAction = MGSwipeButton(title: "修正", backgroundColor: UIColor(hex: "43A047")) { (tableCell) -> Bool in
@@ -98,7 +101,9 @@ class TableViewController: UITableViewController, MGSwipeTableCellDelegate {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
 				self.tableView.reloadData()
 			})
-			self.printSections()
+			if self.DEBUG {
+				self.printSections()
+			}
 			return true
 		}
 

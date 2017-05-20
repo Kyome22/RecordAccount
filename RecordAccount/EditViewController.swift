@@ -60,15 +60,21 @@ class EditViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
 
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		updateButton.isEnabled = false
+	}
+
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		self.view.endEditing(true)
 		fillBox()
+		updateButton.isEnabled = true
 		return true
 	}
     
 	@IBAction func tap(_ sender: Any) {
 		self.view.endEditing(true)
 		fillBox()
+		updateButton.isEnabled = true
 	}
 
 	func fillBox() {

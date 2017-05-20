@@ -8,13 +8,21 @@
 
 import UIKit
 
+protocol MainCustomTableViewCellDelegate {
+	func willstartEditing()
+	func didEndEditing(section: Int, name: String, value: Int)
+	func removeCell(section: Int)
+}
+
 class MainCustomTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 	public var itemNameField = UITextField()
 	public var itemValueField = UITextField()
 	private var unitLabel = UILabel()
+	private var section_: Int!
 	private var name_: String!
 	private var value_: Int!
+	var delegate: MainCustomTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,11 +32,13 @@ class MainCustomTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
     }
 
-	func setCell(item: Item) {
+	func setCell(section: Int, item: Item, width: CGFloat) {
+		self.section_ = section
 		self.name_ = item.name
 		self.value_ = item.value
 		self.layer.cornerRadius = 10
 		self.layer.backgroundColor = UIColor(hex: "ECEFF1").cgColor
+		self.bounds.size = CGSize(width: width, height: 44)
 		let size: CGRect = self.bounds
 		itemNameField.delegate = self
 		itemNameField.frame = CGRect(x: size.width * 0.05, y: size.height * 0.05,
@@ -62,6 +72,10 @@ class MainCustomTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.contentView.addSubview(itemNameField)
 		self.contentView.addSubview(itemValueField)
 		self.contentView.addSubview(unitLabel)
+
+		let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(removeCell))
+		swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+		self.addGestureRecognizer(swipeGestureRecognizer)
 	}
 
 	func endEdit() {
@@ -72,11 +86,20 @@ class MainCustomTableViewCell: UITableViewCell, UITextFieldDelegate {
 		if itemValueField.text == "" {
 			itemValueField.text = String(self.value_)
 		}
+		self.delegate?.didEndEditing(section: section_, name: itemNameField.text!, value: Int(itemValueField.text!)!)
+	}
+
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		self.delegate?.willstartEditing()
 	}
 
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		endEdit()
 		return true
+	}
+
+	func removeCell() {
+		self.delegate?.removeCell(section: section_)
 	}
 
 }

@@ -23,7 +23,8 @@ class ItemCustomTableViewCell: MGSwipeTableCell {
 		super.setSelected(selected, animated: animated)
 	}
 
-	func setCell(item: Item) {
+	func setCell(item: Item, width: CGFloat) {
+		self.bounds.size = CGSize(width: width, height: 44)
 		let size: CGRect = self.bounds
 		self.layer.backgroundColor = UIColor.white.cgColor
 		itemNameLabel.frame = CGRect(x: size.width * 0.1, y: size.height * 0.05,
@@ -35,6 +36,7 @@ class ItemCustomTableViewCell: MGSwipeTableCell {
 		itemValueLabel.frame = CGRect(x: size.width * 0.6, y: size.height * 0.05,
 		                              width: size.width * 0.35, height: size.height * 0.9)
 		itemValueLabel.textAlignment = .right
+		itemValueLabel.font = UIFont(name: itemValueLabel.font.fontName, size: 21)
 		itemValueLabel.textColor = UIColor(hex: "424242")
 		itemValueLabel.text = String(item.value) + "円"
 		self.contentView.addSubview(itemNameLabel)

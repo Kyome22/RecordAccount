@@ -22,7 +22,8 @@ class DateCustomTableViewCell: MGSwipeTableCell {
         super.setSelected(selected, animated: animated)
     }
 
-	func setCell(date: String) {
+	func setCell(date: String, width: CGFloat) {
+		self.bounds.size = CGSize(width: width, height: 44)
 		let size: CGRect = self.bounds
 		self.layer.backgroundColor = UIColor.white.cgColor
 		dateLabel.frame = CGRect(x: size.width * 0.05, y: size.height * 0.05,

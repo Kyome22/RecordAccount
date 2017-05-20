@@ -64,7 +64,6 @@ class HintViewController: UIPageViewController {
 extension HintViewController: UIPageViewControllerDataSource {
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		print(viewController.restorationIdentifier!)
 		if viewController.restorationIdentifier == "ThirdHint" {
 			return getView(page: 2)
 		} else if viewController.restorationIdentifier == "SecondHint" {
@@ -75,7 +74,6 @@ extension HintViewController: UIPageViewControllerDataSource {
 	}
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-		print(viewController.restorationIdentifier!)
 		if viewController.restorationIdentifier == "FirstHint" {
 			return getView(page: 2)
 		} else if viewController.restorationIdentifier == "SecondHint" {
